@@ -1,9 +1,9 @@
 import "./CityCard.scss";
-import SingleCity from "../../SingleCity/SingleCity.jsx";
+import SingleCity from "../SingleCity/SingleCity.jsx";
 
 const CityCard = (props) => {
 
-    const {filteredCities, setCityId} = props;
+    const {filteredCities, setCityId, getWeather} = props;
 
     const mappedFilteredCities = filteredCities.map((filteredCity) => {
         return (
@@ -11,7 +11,8 @@ const CityCard = (props) => {
                         state={filteredCity.state}
                         country={filteredCity.country}
                         id={filteredCity.id}
-                        setCityId={setCityId}/>
+                        setCityId={setCityId}
+                        getWeather={getWeather}/>
         )
     })
 

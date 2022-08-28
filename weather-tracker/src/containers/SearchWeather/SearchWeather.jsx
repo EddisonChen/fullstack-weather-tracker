@@ -2,11 +2,11 @@ import "./SearchWeather.scss";
 import {useState, useEffect} from "react";
 import SearchBar from "../../components/SearchBar/SearchBar.jsx";
 import cityIdDatas from "../../cityIdData/city.list.json"
-import CityCard from "../../components/SearchBar/CityCard/CityCard";
+import CityCard from "../../components/CityCard/CityCard";
 
 const SearchWeather = (props) => {
 
-    const {setCityId} = props;
+    const {setCityId, getWeather} = props;
 
     const [cityName, setCityName] = useState("");
 
@@ -32,7 +32,7 @@ const SearchWeather = (props) => {
     return (
         <>
             <SearchBar handleSearchInput={handleSearchInput} cityName={cityName}/>
-            <CityCard filteredCities={filteredCities} setCityId={setCityId}/>
+            <CityCard filteredCities={filteredCities} setCityId={setCityId} getWeather={getWeather}/>
         </>
     )
 

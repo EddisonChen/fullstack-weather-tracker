@@ -2,11 +2,12 @@ import "./SingleCity.scss";
 
 const SingleCity = (props) => {
 
-    const {name, state, country, id, setCityId} = props;
+    const {name, state, country, id, setCityId, getWeather} = props;
 
     const handleCityCardClick = () => {
         setCityId(id)
         console.log(id)
+        getWeather()
     }
 
     return (

@@ -17,18 +17,17 @@ function App() {
     })
   }
 
-  // useEffect(getWeather, cityId)
-
   // console.log(weather)
 
   console.log(cityId)
+  console.log(weather)
 
   return (
     <>
       <h1>WEATHER CHECKER!!!!
       </h1>
-      <SearchWeather setCityId={setCityId}/>
-      <ShowWeather weather={weather}/>
+      <SearchWeather setCityId={setCityId} getWeather={getWeather}/>
+      {weather && <ShowWeather weather={weather}/>}
     </>
     
   );
