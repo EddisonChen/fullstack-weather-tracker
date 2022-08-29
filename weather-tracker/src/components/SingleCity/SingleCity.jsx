@@ -1,17 +1,26 @@
 import "./SingleCity.scss";
+import { useEffect } from "react";
 
 const SingleCity = (props) => {
 
     const {name, state, country, id, setCityId, getWeather} = props;
 
     const handleCityCardClick = () => {
-        setCityId(id)
-        console.log(id)
         getWeather()
     }
 
+    const handleCityCardMouseEnter = () => {
+        setCityId(id)
+    }
+
+    const handleCityCardMouseLeave = () => {
+        setCityId()
+    }
+
+
+
     return (
-        <div onClick={handleCityCardClick}>
+        <div onMouseEnter={handleCityCardMouseEnter} onMouseLeave={handleCityCardMouseLeave} onClick={handleCityCardClick}>
             <p>{name}</p>
             <p>{state}</p>
             <p>{country}</p>

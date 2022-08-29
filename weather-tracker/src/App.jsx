@@ -9,15 +9,14 @@ function App() {
   const [weather, setWeather] = useState();
 
   const getWeather = () => {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=964f31dcf4f3ff4c455a61f30fa14d19`)
+    console.log(cityId)
+      fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=964f31dcf4f3ff4c455a61f30fa14d19`)
     .then((response) => {
       return response.json()
     }) .then((weatherData) => {
       setWeather(weatherData)
     })
   }
-
-  // console.log(weather)
 
   console.log(cityId)
   console.log(weather)
@@ -34,3 +33,5 @@ function App() {
 }
 
 export default App;
+
+// getWeather is one step behind??

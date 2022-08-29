@@ -1,6 +1,6 @@
-import "./cityWeatherCard.scss";
+import "./CityWeatherCard.scss";
 
-const cityWeatherCard = (props) => {
+const CityWeatherCard = (props) => {
 
     const {cityName,
         countryName,
@@ -11,11 +11,13 @@ const cityWeatherCard = (props) => {
         minTemp,
         rain,
         mainWeather,
-        wind} = props;
+        wind,
+        weather} = props;
 
     return (
         <div>
             <p>{cityName}</p>
+            {/* <p>{countryName}</p>
             <p>{feelsLike}</p>
             <p>{humidity}</p>
             <p>{temp}</p>
@@ -23,9 +25,9 @@ const cityWeatherCard = (props) => {
             <p>{minTemp}</p>
             <p>{rain}</p>
             <p>{mainWeather}</p>
-            <p>{wind}</p>
+            <p>{wind}</p> */}
         </div>
     )
 }
 
-export default cityWeatherCard;
+export default CityWeatherCard;
