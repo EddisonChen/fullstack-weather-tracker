@@ -17,14 +17,9 @@ const SingleCity = (props) => {
         setCityId()
     }
 
-
-
     return (
         <div onMouseEnter={handleCityCardMouseEnter} onMouseLeave={handleCityCardMouseLeave} onClick={handleCityCardClick}>
-            <p>{name}</p>
-            <p>{state}</p>
-            <p>{country}</p>
-            <p>{id}</p>
+            <p>{name}, {state}, {country}</p>
         </div>
     )
 }

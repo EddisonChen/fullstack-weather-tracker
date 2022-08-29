@@ -15,6 +15,7 @@ const ShowWeather = (props) => {
     const [visibility, setVisibility] = useState(weather.visibility);
     const [windSpeed, setWindSpeed] = useState(weather.wind.speed)
     const [windDirection, setWindDirection] = useState(weather.wind.deg)
+    const [windGust, setWindGust] = useState(weather.wind.gust)
 
     const unitConverter = () => {
         if (unitType == true) { // fahrenheit
@@ -22,15 +23,17 @@ const ShowWeather = (props) => {
             setFeelsLikeTemp(((weather.main.feels_like - 273.15)*9/5+32).toFixed() + "°F");
             setHighTemp(((weather.main.temp_max - 273.15)*9/5+32).toFixed() + "°F");
             setLowTemp(((weather.main.temp_min - 273.15)*9/5+32).toFixed() + "°F");
-            setVisibility((weather.visibility)*3.281 + " Feet")
-            setWindSpeed((weather.wind.speed)*2.237 + "MPH")
+            setVisibility((weather.visibility)*3.281 + " feet")
+            setWindSpeed(((weather.wind.speed)*2.237).toFixed() + "MPH")
+            setWindGust(((weather.wind.gust)*2.237).toFixed() + "MPH")
         } else if (unitType == false) { // celsius
             setMainTemp((weather.main.temp - 273.15).toFixed() + "°C");
             setFeelsLikeTemp((weather.main.feels_like - 273.15).toFixed() + "°C");
             setHighTemp((weather.main.temp_max - 273.15).toFixed() + "°C");
             setLowTemp((weather.main.temp_min - 273.15).toFixed() + "°C");
-            setVisibility((weather.visibility) + "M")
-            setWindSpeed((weather.wind.speed) + "m/s")
+            setVisibility((weather.visibility) + " meters")
+            setWindSpeed((weather.wind.speed).toFixed() + "m/s")
+            setWindGust(((weather.wind.gust)).toFixed() + "m/s")
         }
     }
 
@@ -38,21 +41,21 @@ const ShowWeather = (props) => {
 
     const windDIrectionConverter = () => {
         if (weather.wind.deg > 337.5 || weather.wind.deg < 22.5) {
-            setWindDirection("N")
+            setWindDirection("North")
         } else if (weather.wind.deg > 22.5 && weather.wind.deg < 67.5) {
-            setWindDirection("NE")
+            setWindDirection("Northeast")
         } else if (weather.wind.deg > 67.5 && weather.wind.deg < 112.5) {
-            setWindDirection("E") 
+            setWindDirection("East") 
         } else if (weather.wind.deg > 112.5 && weather.wind.deg < 157.5) {
-            setWindDirection("SE") 
+            setWindDirection("Southeast") 
         } else if (weather.wind.deg > 157.5 && weather.wind.deg < 202.5) {
-            setWindDirection("S") 
+            setWindDirection("South") 
         } else if (weather.wind.deg > 202.5 && weather.wind.deg < 247.5) {
-            setWindDirection("SW") 
+            setWindDirection("Southwest") 
         } else if (weather.wind.deg > 247.5 && weather.wind.deg < 292.5) {
-            setWindDirection("W") 
+            setWindDirection("West") 
         } else if (weather.wind.deg > 292.5 && weather.wind.deg < 337.5) {
-            setWindDirection("NW") 
+            setWindDirection("Northwest") 
         }
     }
 
@@ -62,14 +65,13 @@ const ShowWeather = (props) => {
             <div>
                 <UnitToggle setUnitType={setUnitType} unitType={unitType} unitConverter={unitConverter}/>
                 <div>
-                    <h1>{weather.name}</h1>
-                    <h2>{weather.sys.country}</h2>
+                    <h1>{weather.name}, {weather.sys.country}</h1>
                     <h3>{weather.weather[0].main}, {weather.weather[0].description}</h3>
                     <p>{mainTemp}, feels like {feelsLikeTemp}</p>
                     <p>Temperature Range: {highTemp} - {lowTemp}</p>
                     <p>Humidity: {weather.main.humidity}%</p>
                     <p>Visibility: {visibility}</p>
-                    <p>Wind: Direction: {windDirection} Speed: {windSpeed}</p>
+                    <p>Wind: Direction: {windDirection} Speed: {windSpeed} Gusts: {windGust || "No gusts!"}</p>
                 </div>
             </div>
         )
