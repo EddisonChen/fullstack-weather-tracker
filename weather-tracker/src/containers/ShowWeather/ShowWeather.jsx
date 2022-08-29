@@ -33,7 +33,7 @@ const ShowWeather = (props) => {
             setLowTemp((weather.main.temp_min - 273.15).toFixed() + "°C");
             setVisibility((weather.visibility) + " meters")
             setWindSpeed((weather.wind.speed).toFixed() + "m/s")
-            setWindGust(((weather.wind.gust)).toFixed() + "m/s")
+            setWindGust(weather.wind.gust + "m/s")
         }
     }
 
@@ -71,7 +71,8 @@ const ShowWeather = (props) => {
                     <p>Temperature Range: {highTemp} - {lowTemp}</p>
                     <p>Humidity: {weather.main.humidity}%</p>
                     <p>Visibility: {visibility}</p>
-                    <p>Wind: Direction: {windDirection} Speed: {windSpeed} Gusts: {windGust || "No gusts!"}</p>
+                    <p>Wind: Direction: {windDirection} Speed: {windSpeed}</p>
+                    {weather.wind.gust && <p>Gusts: {windGust}</p>}
                 </div>
             </div>
         )

@@ -12,7 +12,7 @@ const UnitToggle = (props) => {
 
     return (
         <div>
-            <p>Imperial Units?</p>
+            <h1>Unit Switcher!</h1>
             <label className="switch">
                 <input type="checkbox" onClick={handleToggleClick}/>
                 <span className="slider round"></span>
