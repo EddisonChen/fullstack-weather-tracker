@@ -23,8 +23,7 @@ function App() {
 
   return (
     <>
-      <h1>WEATHER CHECKER!!!!
-      </h1>
+      <h1>WEATHER CHECKER!!!!</h1>
       <SearchWeather setCityId={setCityId} getWeather={getWeather}/>
       {weather && <ShowWeather weather={weather}/>}
     </>
