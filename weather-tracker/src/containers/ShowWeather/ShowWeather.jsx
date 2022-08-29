@@ -13,9 +13,9 @@ const ShowWeather = (props) => {
     const [highTemp, setHighTemp] = useState(weather.main.temp_max);
     const [lowTemp, setLowTemp] = useState(weather.main.temp_min);
     const [visibility, setVisibility] = useState(weather.visibility);
-    const [windSpeed, setWindSpeed] = useState(weather.wind.speed)
-    const [windDirection, setWindDirection] = useState(weather.wind.deg)
-    const [windGust, setWindGust] = useState(weather.wind.gust)
+    const [windSpeed, setWindSpeed] = useState(weather.wind.speed);
+    const [windDirection, setWindDirection] = useState(weather.wind.deg);
+    const [windGust, setWindGust] = useState(weather.wind.gust);
 
     const unitConverter = () => {
         if (unitType == true) { // fahrenheit
@@ -23,43 +23,43 @@ const ShowWeather = (props) => {
             setFeelsLikeTemp(((weather.main.feels_like - 273.15)*9/5+32).toFixed() + "°F");
             setHighTemp(((weather.main.temp_max - 273.15)*9/5+32).toFixed() + "°F");
             setLowTemp(((weather.main.temp_min - 273.15)*9/5+32).toFixed() + "°F");
-            setVisibility((weather.visibility)*3.281 + " feet")
-            setWindSpeed(((weather.wind.speed)*2.237).toFixed() + "MPH")
-            setWindGust(((weather.wind.gust)*2.237).toFixed() + "MPH")
+            setVisibility((weather.visibility)*3.281 + " feet");
+            setWindSpeed(((weather.wind.speed)*2.237).toFixed() + "MPH");
+            setWindGust(((weather.wind.gust)*2.237).toFixed() + "MPH");
         } else if (unitType == false) { // celsius
             setMainTemp((weather.main.temp - 273.15).toFixed() + "°C");
             setFeelsLikeTemp((weather.main.feels_like - 273.15).toFixed() + "°C");
             setHighTemp((weather.main.temp_max - 273.15).toFixed() + "°C");
             setLowTemp((weather.main.temp_min - 273.15).toFixed() + "°C");
-            setVisibility((weather.visibility) + " meters")
-            setWindSpeed((weather.wind.speed).toFixed() + "m/s")
-            setWindGust(weather.wind.gust + "m/s")
+            setVisibility((weather.visibility) + " meters");
+            setWindSpeed((weather.wind.speed).toFixed() + "m/s");
+            setWindGust(weather.wind.gust + "m/s");
         }
     }
 
     useEffect(unitConverter)
 
-    const windDIrectionConverter = () => {
+    const windDirectionConverter = () => {
         if (weather.wind.deg > 337.5 || weather.wind.deg < 22.5) {
-            setWindDirection("North")
+            setWindDirection("North");
         } else if (weather.wind.deg > 22.5 && weather.wind.deg < 67.5) {
-            setWindDirection("Northeast")
+            setWindDirection("Northeast");
         } else if (weather.wind.deg > 67.5 && weather.wind.deg < 112.5) {
-            setWindDirection("East") 
+            setWindDirection("East");
         } else if (weather.wind.deg > 112.5 && weather.wind.deg < 157.5) {
-            setWindDirection("Southeast") 
+            setWindDirection("Southeast");
         } else if (weather.wind.deg > 157.5 && weather.wind.deg < 202.5) {
-            setWindDirection("South") 
+            setWindDirection("South");
         } else if (weather.wind.deg > 202.5 && weather.wind.deg < 247.5) {
-            setWindDirection("Southwest") 
+            setWindDirection("Southwest"); 
         } else if (weather.wind.deg > 247.5 && weather.wind.deg < 292.5) {
-            setWindDirection("West") 
+            setWindDirection("West"); 
         } else if (weather.wind.deg > 292.5 && weather.wind.deg < 337.5) {
-            setWindDirection("Northwest") 
+            setWindDirection("Northwest"); 
         }
     }
 
-    useEffect(windDIrectionConverter)
+    useEffect(windDirectionConverter)
 
         return (
             <div>
