@@ -76,7 +76,7 @@ const ShowWeather = (props) => {
     }
 
     const jsonData = {
-        CityId: weather.id,
+        cityId: weather.id,
         nameCity: weather.name,
         nameCountry: weather.sys.country,
         weatherMain: weather.weather[0].main,
@@ -96,7 +96,8 @@ const ShowWeather = (props) => {
 
         return (
             <div>
-                <UnitToggle setUnitType={setUnitType} unitType={unitType} unitConverter={unitConverter}/>
+                <UnitToggle 
+                setUnitType={setUnitType} unitType={unitType} unitConverter={unitConverter}/>
                 <div>
                     <h2>{weather.name}, {weather.sys.country}</h2>
                     <h3>{weather.weather[0].main}, {weather.weather[0].description}</h3>
@@ -107,7 +108,7 @@ const ShowWeather = (props) => {
                     <p>Wind: Direction: {windDirection} Speed: {windSpeed}</p>
                     {weather.wind.gust && <p>Gusts: {windGust}</p>}
                 </div>
-                <HistoricWeather cityId={weather.id}/>
+                <HistoricWeather weather={weather}/>
             </div>
         )
 
