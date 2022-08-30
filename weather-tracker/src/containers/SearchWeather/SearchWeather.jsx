@@ -28,7 +28,6 @@ const SearchWeather = (props) => {
 
     console.log(filteredCities)
 
-
     return (
         <>
             <SearchBar handleSearchInput={handleSearchInput} cityName={cityName}/>

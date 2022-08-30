@@ -65,7 +65,7 @@ const ShowWeather = (props) => {
             <div>
                 <UnitToggle setUnitType={setUnitType} unitType={unitType} unitConverter={unitConverter}/>
                 <div>
-                    <h1>{weather.name}, {weather.sys.country}</h1>
+                    <h2>{weather.name}, {weather.sys.country}</h2>
                     <h3>{weather.weather[0].main}, {weather.weather[0].description}</h3>
                     <p>{mainTemp}, feels like {feelsLikeTemp}</p>
                     <p>Temperature Range: {highTemp} - {lowTemp}</p>

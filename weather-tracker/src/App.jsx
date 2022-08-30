@@ -9,7 +9,6 @@ function App() {
   const [weather, setWeather] = useState();
 
   const getWeather = () => {
-    console.log(cityId)
       fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=964f31dcf4f3ff4c455a61f30fa14d19`)
     .then((response) => {
       return response.json()
@@ -18,12 +17,9 @@ function App() {
     })
   }
 
-  console.log(cityId)
-  console.log(weather)
-
   return (
     <>
-      <h1>WEATHER CHECKER!!!!</h1>
+      <h1>WEATHER CHECKER!</h1>
       <SearchWeather setCityId={setCityId} getWeather={getWeather}/>
       {weather && <ShowWeather weather={weather}/>}
     </>
@@ -32,5 +28,3 @@ function App() {
 }
 
 export default App;
-
-// getWeather is one step behind??
