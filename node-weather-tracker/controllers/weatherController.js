@@ -11,7 +11,7 @@ export const getCityWeather = (req, res) => {
 
 export const addCityWeather = (req, res) => {
     CityWeather.create({
-        id: req.body.id,
+        cityId: req.body.cityId,
         nameCity: req.body.nameCity,
         nameCountry: req.body.nameCountry,
         weatherMain: req.body.weatherMain,
@@ -33,8 +33,12 @@ export const addCityWeather = (req, res) => {
 }
 
 export const getCityWeatherById = (req, res) => {
-    const id = parseInt(req.params.id);
-    CityWeather.findByPk(id)
+    const cityId = parseInt(req.params.cityId);
+    CityWeather.findOne({
+        where: {
+            cityId: cityId
+        }
+    })
     .then(cityWeathers => {
         res.status(200).send(cityWeathers)
     }) .catch(err => {

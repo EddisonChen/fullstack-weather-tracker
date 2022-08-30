@@ -7,6 +7,6 @@ router.get('/', getCityWeather);
 
 router.post('/newweather', addCityWeather);
 
-router.get('/:id', getCityWeatherById);
+router.get('/:cityId', getCityWeatherById);
 
 export default router;

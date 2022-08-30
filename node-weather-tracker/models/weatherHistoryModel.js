@@ -2,10 +2,15 @@ import {Sequelize} from "sequelize";
 import {sequelize} from "../db/index.js";
 
 export const CityWeather = sequelize.define("cityWeathers", {
-    id: {
+    cityId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true
+    },
+    id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
     },
     nameCity: {
         type: Sequelize.STRING

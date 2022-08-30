@@ -76,7 +76,7 @@ const ShowWeather = (props) => {
     }
 
     const jsonData = {
-        id: weather.id,
+        CityId: weather.id,
         nameCity: weather.name,
         nameCountry: weather.sys.country,
         weatherMain: weather.weather[0].main,
