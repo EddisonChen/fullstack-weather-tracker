@@ -20,7 +20,7 @@ function App() {
   return (
     <>
       <h1>WEATHER CHECKER!</h1>
-      <SearchWeather setCityId={setCityId} getWeather={getWeather}/>
+      <SearchWeather setCityId={setCityId} getWeather={getWeather} weather={weather}/>
       {weather && <ShowWeather weather={weather}/>}
     </>
     

@@ -6,7 +6,7 @@ import CityCard from "../../components/CityCard/CityCard";
 
 const SearchWeather = (props) => {
 
-    const {setCityId, getWeather} = props;
+    const {setCityId, getWeather, weather} = props;
 
     const [cityName, setCityName] = useState("");
 
@@ -31,7 +31,7 @@ const SearchWeather = (props) => {
     return (
         <>
             <SearchBar handleSearchInput={handleSearchInput} cityName={cityName}/>
-            <CityCard filteredCities={filteredCities} setCityId={setCityId} getWeather={getWeather}/>
+            <CityCard filteredCities={filteredCities} setCityId={setCityId} getWeather={getWeather} weather={weather}/>
         </>
     )
 
