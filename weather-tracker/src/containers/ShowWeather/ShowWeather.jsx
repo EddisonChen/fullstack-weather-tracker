@@ -106,7 +106,7 @@ const ShowWeather = (props) => {
                     <p>Humidity: {weather.main.humidity}%</p>
                     <p>Visibility: {visibility}</p>
                     <p>Wind: Direction: {windDirection} Speed: {windSpeed}</p>
-                    {weather.wind.gust && <p>Gusts: {windGust}</p>}
+                    {weather.wind.gust && <p>Wind Gusts: {windGust}</p>}
                 </div>
                 <HistoricWeather weather={weather}/>
             </div>
