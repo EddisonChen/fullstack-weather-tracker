@@ -13,7 +13,7 @@ const UnitToggle = (props) => {
 
     return (
         <div>
-            <h2>Unit Switcher!</h2>
+            <h2>Unit Toggle</h2>
             <label className="switch">
                 <input type="checkbox" onClick={handleToggleClick}/>
                 <span className="slider round"></span>
