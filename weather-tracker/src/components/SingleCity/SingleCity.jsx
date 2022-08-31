@@ -3,10 +3,11 @@ import { useEffect } from "react";
 
 const SingleCity = (props) => {
 
-    const {name, state, country, id, setCityId, getWeather, addNewCityWeather} = props;
+    const {name, state, country, id, setCityId, getWeather, addNewCityWeather, setCityName} = props;
 
     const handleCityCardClick = () => {
         getWeather()
+        setCityName("")
     }
     const handleCityCardMouseEnter = () => {
         setCityId(id)

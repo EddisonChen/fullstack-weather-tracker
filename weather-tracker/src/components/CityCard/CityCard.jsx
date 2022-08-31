@@ -3,7 +3,7 @@ import SingleCity from "../SingleCity/SingleCity.jsx";
 
 const CityCard = (props) => {
 
-    const {filteredCities, setCityId, getWeather, weather} = props;
+    const {filteredCities, setCityId, getWeather, weather, setCityName} = props;
 
     const mappedFilteredCities = filteredCities.map((filteredCity) => {
         return (
@@ -13,6 +13,7 @@ const CityCard = (props) => {
                         id={filteredCity.id}
                         setCityId={setCityId}
                         getWeather={getWeather}
+                        setCityName={setCityName}
                         />
         )
     })

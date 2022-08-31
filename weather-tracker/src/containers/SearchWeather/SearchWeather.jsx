@@ -22,16 +22,15 @@ const SearchWeather = (props) => {
         }
     })
 
-    const filteredCitiesIds = filteredCities.map((filteredCity) => {
-        return filteredCity.id
-    })
-
-    console.log(filteredCities)
-
     return (
         <>
             <SearchBar handleSearchInput={handleSearchInput} cityName={cityName}/>
-            <CityCard filteredCities={filteredCities} setCityId={setCityId} getWeather={getWeather} weather={weather}/>
+            <CityCard 
+            filteredCities={filteredCities}
+            setCityId={setCityId}
+            getWeather={getWeather} 
+            weather={weather}
+            setCityName={setCityName}/>
         </>
     )
 
