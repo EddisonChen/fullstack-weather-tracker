@@ -22,7 +22,7 @@ const HistoricWeather = (props) => {
 
     return (
         <div>
-            {previousData && <HistoricWeatherCard previousData={previousData}/>}
+            {previousData && weather.id == previousData.cityId &&<HistoricWeatherCard previousData={previousData}/>}
         </div>
     )
 }
