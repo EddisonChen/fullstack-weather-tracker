@@ -7,7 +7,7 @@ const CityCard = (props) => {
 
     const mappedFilteredCities = filteredCities.map((filteredCity) => {
         return (
-            <SingleCity name={filteredCity.name}
+            <SingleCity name={filteredCity.name.slice(0, 30)}
                         state={filteredCity.state}
                         country={filteredCity.country}
                         id={filteredCity.id}

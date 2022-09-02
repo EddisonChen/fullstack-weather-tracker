@@ -63,11 +63,13 @@ const HistoricWeatherCard = (props) => {
 
     return (
         <div>
-            <UnitToggle setUnitType={setUnitType} unitType={unitType} unitConverter={unitConverter} />
-            <div>
+            <div className="historic_toggle">
+                <UnitToggle setUnitType={setUnitType} unitType={unitType} unitConverter={unitConverter} />
+            </div>
+            <div className="cards">
                 <h2>Previous result from {previousData.createdAt.slice(0,10)}</h2>
-                <h3>{previousData.nameCity}, {previousData.nameCountry}</h3>
-                <p>{previousData.weatherMain}, {previousData.weatherDescription}</p>
+                <h2>{previousData.nameCity}, {previousData.nameCountry}</h2>
+                <h3>{previousData.weatherMain}, {previousData.weatherDescription}</h3>
                 <p>{mainTemp}, feels like {feelsLikeTemp} | Range: {highTemp} - {lowTemp}</p>
                 <p>Humidity: {previousData.humidity}%</p>
                 <p>Visibility: {visibility}</p>

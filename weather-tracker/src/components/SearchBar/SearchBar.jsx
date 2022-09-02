@@ -5,10 +5,14 @@ const SearchBar = (props) => {
     const {handleSearchInput, cityName} = props;
 
     return (
-        <input type="textbox"
+        <div>
+            <input type="textbox"
                 placeholder="City Name"
                 onInput={handleSearchInput}
-                value={cityName}></input>
+                value={cityName}
+                className="search_box"
+                ></input>
+        </div>
     )
 } 
 

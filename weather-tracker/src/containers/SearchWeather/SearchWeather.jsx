@@ -23,15 +23,16 @@ const SearchWeather = (props) => {
     })
 
     return (
-        <>
+        <div className="search_func">
             <SearchBar handleSearchInput={handleSearchInput} cityName={cityName}/>
             <CityCard 
             filteredCities={filteredCities}
             setCityId={setCityId}
             getWeather={getWeather} 
             weather={weather}
-            setCityName={setCityName}/>
-        </>
+            setCityName={setCityName}
+            className="city_card"/>
+        </div>
     )
 
 }

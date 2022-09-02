@@ -21,9 +21,15 @@ function App() {
 
   return (
     <>
-      <h1>WEATHER CHECKER!</h1>
-      <SearchWeather setCityId={setCityId} getWeather={getWeather} weather={weather}/>
-      {weather && <ShowWeather weather={weather}/>}
+      <h1 className="title">WEATHERPRO</h1>
+      <div className="body">
+        <div className="search">
+          <SearchWeather setCityId={setCityId} getWeather={getWeather} weather={weather}/>
+        </div>
+        <div className="weather_cards">
+          {weather && <ShowWeather weather={weather}/>}
+        </div>
+      </div>
     </>
     
   );

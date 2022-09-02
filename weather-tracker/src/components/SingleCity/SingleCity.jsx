@@ -20,7 +20,7 @@ const SingleCity = (props) => {
         <div onMouseEnter={handleCityCardMouseEnter} 
             onMouseLeave={handleCityCardMouseLeave} 
             onClick={handleCityCardClick}>
-            <p>{name}, {state}, {country}</p>
+            <p className="cities">{name}, {state}, {country}</p>
         </div>
     )
 }
