@@ -5,7 +5,7 @@ import HistoricWeather from "../HistoricWeather/HistoricWeather";
 
 const ShowWeather = (props) => {
 
-    const {weather, cityId, jsonData, setJsonData} = props;
+    const {weather} = props;
 
     const [unitType, setUnitType] = useState(false)
     
@@ -72,11 +72,12 @@ const ShowWeather = (props) => {
             body: JSON.stringify(jsonData)
         }) .then((res) => {
             console.log(res)
+        }) .catch((err) => {
+                console.log(err)
         })
     }
 
-    const settingJsonData = () => {
-        setJsonData( {
+    const jsonData = {
             cityId: weather.id,
             nameCity: weather.name,
             nameCountry: weather.sys.country,
@@ -91,11 +92,11 @@ const ShowWeather = (props) => {
             windDirection: weather.wind.deg,
             windSpeed: weather.wind.speed,
             windGustSpeed: weather.wind.gust
-        })
-    }
+        }
 
-    useEffect(addNewWeather, [weather.id, cityId, jsonData])
-    useEffect(settingJsonData, [weather, cityId])
+    console.log(jsonData)
+
+    useEffect(addNewWeather, [jsonData])
 
         return (
             <div>

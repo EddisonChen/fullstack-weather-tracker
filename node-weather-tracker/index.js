@@ -8,6 +8,21 @@ const app = express();
 
 app.use(bodyParser.json());
 
+const corsOpts = {
+    origin: '*',
+  
+    methods: [
+      'GET',
+      'POST',
+    ],
+  
+    allowedHeaders: [
+      'Content-Type',
+    ],
+  };
+  
+  app.use(cors(corsOpts))
+
 app.use("/weather", router)
 
 const port = 3020;
@@ -18,10 +33,6 @@ sequelize.sync()
 }) .catch((err) => {
     console.log(err)
 });
-
-app.use(cors({
-    origin: '*'
-}));
 
 app.listen(port, (req, res) => {
     console.log(`Server is running on ${port}`)
