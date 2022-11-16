@@ -8,18 +8,11 @@ const SingleCity = (props) => {
     const handleCityCardClick = () => {
         getWeather()
         setCityName("")
-    }
-    const handleCityCardMouseEnter = () => {
         setCityId(id)
-    }
-    const handleCityCardMouseLeave = () => {
-        setCityId()
     }
 
     return (
-        <div onMouseEnter={handleCityCardMouseEnter} 
-            onMouseLeave={handleCityCardMouseLeave} 
-            onClick={handleCityCardClick}>
+        <div onClick={handleCityCardClick}>
             <p className="cities">{name}, {state}, {country}</p>
         </div>
     )

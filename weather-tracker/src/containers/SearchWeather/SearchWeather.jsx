@@ -18,7 +18,7 @@ const SearchWeather = (props) => {
     const filteredCities = cityIdDatas.filter((cityIdData) => {
         const cityDataName = cityIdData.name.toLowerCase()
         if (cityName.length > 2) {
-            return cityDataName.startsWith(cityName)
+            return cityDataName.includes(cityName)
         }
     })
 

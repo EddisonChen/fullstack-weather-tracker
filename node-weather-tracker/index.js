@@ -24,6 +24,6 @@ app.use(cors({
 }));
 
 app.listen(port, (req, res) => {
-    console.log(`Server be running on ${port}`)
+    console.log(`Server is running on ${port}`)
 });
 

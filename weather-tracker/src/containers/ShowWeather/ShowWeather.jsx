@@ -5,7 +5,7 @@ import HistoricWeather from "../HistoricWeather/HistoricWeather";
 
 const ShowWeather = (props) => {
 
-    const {weather} = props;
+    const {weather, cityId, jsonData, setJsonData} = props;
 
     const [unitType, setUnitType] = useState(false)
     
@@ -19,7 +19,7 @@ const ShowWeather = (props) => {
     const [windGust, setWindGust] = useState(weather.wind.gust);
 
     const unitConverter = () => {
-        if (unitType == true) { // fahrenheit
+        if (unitType === true) { // fahrenheit
             setMainTemp(((weather.main.temp - 273.15)*9/5+32).toFixed() + "°F");
             setFeelsLikeTemp(((weather.main.feels_like - 273.15)*9/5+32).toFixed() + "°F");
             setHighTemp(((weather.main.temp_max - 273.15)*9/5+32).toFixed() + "°F");
@@ -27,7 +27,7 @@ const ShowWeather = (props) => {
             setVisibility((weather.visibility)*3.281 + " feet");
             setWindSpeed(((weather.wind.speed)*2.237).toFixed() + "MPH");
             setWindGust(((weather.wind.gust)*2.237).toFixed() + "MPH");
-        } else if (unitType == false) { // celsius
+        } else if (unitType === false) { // celsius
             setMainTemp((weather.main.temp - 273.15).toFixed() + "°C");
             setFeelsLikeTemp((weather.main.feels_like - 273.15).toFixed() + "°C");
             setHighTemp((weather.main.temp_max - 273.15).toFixed() + "°C");
@@ -63,7 +63,7 @@ const ShowWeather = (props) => {
     useEffect(windDirectionConverter)
 
     const addNewWeather = () => {
-        fetch("http://192.168.56.1:3020/weather/newweather", {
+        fetch("http://192.168.56.1:3020/weather/newweather",{
             method: "POST",
             headers: {
                 "Accept": "application/json",
@@ -75,29 +75,32 @@ const ShowWeather = (props) => {
         })
     }
 
-    const jsonData = {
-        cityId: weather.id,
-        nameCity: weather.name,
-        nameCountry: weather.sys.country,
-        weatherMain: weather.weather[0].main,
-        weatherDescription: weather.weather[0].description,
-        tempMain: weather.main.temp,
-        tempHigh: weather.main.temp_max,
-        tempLow: weather.main.temp_min,
-        tempFeelsLike: weather.main.feels_like,
-        humidity: weather.main.humidity,
-        visibility: weather.visibility,
-        windDirection: weather.wind.deg,
-        windSpeed: weather.wind.speed,
-        windGustSpeed: weather.wind.gust
+    const settingJsonData = () => {
+        setJsonData( {
+            cityId: weather.id,
+            nameCity: weather.name,
+            nameCountry: weather.sys.country,
+            weatherMain: weather.weather[0].main,
+            weatherDescription: weather.weather[0].description,
+            tempMain: weather.main.temp,
+            tempHigh: weather.main.temp_max,
+            tempLow: weather.main.temp_min,
+            tempFeelsLike: weather.main.feels_like,
+            humidity: weather.main.humidity,
+            visibility: weather.visibility,
+            windDirection: weather.wind.deg,
+            windSpeed: weather.wind.speed,
+            windGustSpeed: weather.wind.gust
+        })
     }
 
-    useEffect(addNewWeather, [weather.id])
+    useEffect(addNewWeather, [weather.id, cityId, jsonData])
+    useEffect(settingJsonData, [weather, cityId])
 
         return (
             <div>
                 <div className="both_cards">
-                    <div classname="toggle_card">
+                    <div className="toggle_card">
                         <div className="toggle">
                             <UnitToggle 
                             setUnitType={setUnitType} unitType={unitType} unitConverter={unitConverter}/>
