@@ -2,6 +2,7 @@ import './App.scss';
 import {useState, useEffect} from "react";
 import SearchWeather from './containers/SearchWeather/SearchWeather';
 import ShowWeather from './containers/ShowWeather/ShowWeather';
+import api_key from '../config'
 
 function App() {
 
@@ -13,7 +14,7 @@ function App() {
 
   const getWeather = () => {
     if  (cityId !== "") {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=964f31dcf4f3ff4c455a61f30fa14d19`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${api_key}`)
       .then((response) => {
         return response.json()
       }) .then((weatherData) => {
