@@ -1,6 +1,5 @@
 import "./SearchWeather.scss";
 import {useState, useEffect} from "react";
-import SearchBar from "../../components/SearchBar/SearchBar.jsx";
 import cityIdDatas from "../../cityIdData/city.list.json";
 import CityCard from "../../components/CityCard/CityCard";
 
@@ -24,7 +23,14 @@ const SearchWeather = (props) => {
 
     return (
         <div className="search_func">
-            <SearchBar handleSearchInput={handleSearchInput} cityName={cityName}/>
+            <div className="search_Bar">
+                <input type="textbox"
+                    placeholder="City Name"
+                    onInput={handleSearchInput}
+                    value={cityName}
+                    className="search_box">
+                </input>
+            </div>
             <CityCard 
             filteredCities={filteredCities}
             setCityId={setCityId}

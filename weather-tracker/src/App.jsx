@@ -8,6 +8,7 @@ function App() {
 
   const [cityId, setCityId] = useState("");
   const [weather, setWeather] = useState();
+  const [previousData, setPreviousData] = useState();
 
   const getWeather = () => { // fetch request to get weather data from 3rd party API
     if  (cityId !== "") {
@@ -35,6 +36,8 @@ function App() {
         <div className="weather_cards">
           {weather && <ShowWeather 
             weather={weather}
+            previousData = {previousData}
+            setPreviousData = {setPreviousData}
             />}
         </div>
       </div>
