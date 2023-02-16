@@ -5,7 +5,7 @@ const SearchBar = (props) => {
     const {handleSearchInput, cityName} = props;
 
     return (
-        <div>
+        <div className="search_Bar">
             <input type="textbox"
                 placeholder="City Name"
                 onInput={handleSearchInput}

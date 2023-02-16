@@ -2,7 +2,7 @@ import './App.scss';
 import {useState, useEffect} from "react";
 import SearchWeather from './containers/SearchWeather/SearchWeather';
 import ShowWeather from './containers/ShowWeather/ShowWeather';
-import api_key from '../config'
+import api_key from './config'
 
 function App() {
 

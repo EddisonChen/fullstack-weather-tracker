@@ -18,6 +18,8 @@ const ShowWeather = (props) => {
     const [windDirection, setWindDirection] = useState(weather.wind.deg);
     const [windGust, setWindGust] = useState(weather.wind.gust);
 
+    //change this to an object
+
     const unitConverter = () => {
         if (unitType === true) { // fahrenheit
             setMainTemp(((weather.main.temp - 273.15)*9/5+32).toFixed() + "°F");
@@ -38,7 +40,7 @@ const ShowWeather = (props) => {
         }
     }
 
-    useEffect(unitConverter)
+    useEffect(unitConverter, [unitType])
 
     const windDirectionConverter = () => {
         if (weather.wind.deg > 337.5 || weather.wind.deg < 22.5) {
@@ -59,6 +61,7 @@ const ShowWeather = (props) => {
             setWindDirection("Northwest"); 
         }
     }
+    // change this to switch statement
 
     useEffect(windDirectionConverter)
 
