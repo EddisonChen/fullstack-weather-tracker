@@ -4,7 +4,7 @@ import WeatherDisplayFunctions from "../../components/WeatherDisplayFunctions/We
 
 const ShowWeather = (props) => {
 
-    const {weather, previousData, setPreviousData} = props;
+    const {weather} = props;
 
     const [unitType, setUnitType] = useState(false)
     const [weatherObject, setWeatherObject] = useState({
@@ -17,6 +17,7 @@ const ShowWeather = (props) => {
         "windDirection": weather.wind.deg,
         "windGustSpeed": weather.wind.gust
     })
+    const [previousData, setPreviousData] = useState();
 
     const getPreviousResults = () => { // fetches historic weather data from API and local database
         console.log(weather.name)
@@ -25,8 +26,9 @@ const ShowWeather = (props) => {
             return response.json();
         }).then((historicWeatherData) => {
             setPreviousData(historicWeatherData)
+            console.log(historicWeatherData)
         }).catch(() => {
-            setPreviousData("none")
+            setPreviousData()
         })
         };
     
@@ -68,16 +70,15 @@ const ShowWeather = (props) => {
 
         return (
             <div className="both_cards">
-                {previousData && <WeatherDisplayFunctions
+                <WeatherDisplayFunctions
                     weather = {weather}
                     unitType = {unitType}
                     setUnitType = {setUnitType}
                     weatherObject = {weatherObject}
                     setWeatherObject = {setWeatherObject}
                     previousData = {previousData}
-                    // previousWeatherDataObject ={previousWeatherDataObject}
-                    // setPreviousWeatherDataObject = {setPreviousWeatherDataObject}
-                    />}
+                    setPreviousData={setPreviousData}
+                    />
             </div>
         )
 
