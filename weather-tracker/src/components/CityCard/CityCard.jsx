@@ -17,7 +17,7 @@ const CityCard = (props) => {
                 setCityName={setCityName}
                 />
         )
-    })
+    });
 
     return (
         <div>

@@ -1,7 +1,7 @@
 import "./SearchWeather.scss";
 import {useState, useEffect} from "react";
 import SearchBar from "../../components/SearchBar/SearchBar.jsx";
-import cityIdDatas from "../../cityIdData/city.list.json"
+import cityIdDatas from "../../cityIdData/city.list.json";
 import CityCard from "../../components/CityCard/CityCard";
 
 const SearchWeather = (props) => {
@@ -10,17 +10,17 @@ const SearchWeather = (props) => {
 
     const [cityName, setCityName] = useState("");
 
-    const handleSearchInput = (event) => {
-        const cleanInput = event.target.value.toLowerCase()
-            setCityName(cleanInput)
+    const handleSearchInput = (event) => { // sets cityName to typed user input
+        const cleanInput = event.target.value.toLowerCase();
+        setCityName(cleanInput);
     };
 
-    const filteredCities = cityIdDatas.filter((cityIdData) => {
-        const cityDataName = cityIdData.name.toLowerCase()
+    const filteredCities = cityIdDatas.filter((cityIdData) => { //filters and displays list of cities that include typed input
+        const cityDataName = cityIdData.name.toLowerCase();
         if (cityName.length > 2) {
-            return cityDataName.includes(cityName)
-        }
-    })
+            return cityDataName.includes(cityName);
+        };
+    });
 
     return (
         <div className="search_func">
@@ -38,8 +38,3 @@ const SearchWeather = (props) => {
 }
 
 export default SearchWeather;
-
-// match city name with city id from json file
-// have filter cities on input, show country as well
-// setcityid to cityid
-// show weatehr based on cityid in showweather

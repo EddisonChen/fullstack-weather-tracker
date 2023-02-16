@@ -1,15 +1,14 @@
 import "./SingleCity.scss";
-import { useEffect } from "react";
 
 const SingleCity = (props) => {
 
     const {name, state, country, id, setCityId, getWeather, setCityName} = props;
 
     const handleCityCardClick = () => { //runs getWeather, clears cityName, and sets cityId upon clicking a city
-        getWeather()
-        setCityName("")
-        setCityId(id)
-    }
+        getWeather();
+        setCityName("");
+        setCityId(id);
+    };
 
     return (
         <div onClick={handleCityCardClick}>

@@ -2,7 +2,7 @@ import './App.scss';
 import {useState, useEffect} from "react";
 import SearchWeather from './containers/SearchWeather/SearchWeather';
 import ShowWeather from './containers/ShowWeather/ShowWeather';
-import api_key from './config'
+import api_key from './config';
 
 function App() {
 
@@ -13,14 +13,14 @@ function App() {
     if  (cityId !== "") {
         fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${api_key}`)
       .then((response) => {
-        return response.json()
+        return response.json();
       }) .then((weatherData) => {
-        setWeather(weatherData)
-      })
-    } else {}
-  }
+        setWeather(weatherData);
+      });
+    };
+  };
 
-  useEffect(getWeather, [cityId]) // runs getWeather when cityID is updated
+  useEffect(getWeather, [cityId]); // runs getWeather when cityID is updated
 
   return (
     <>

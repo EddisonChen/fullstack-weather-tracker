@@ -3,35 +3,75 @@ import UnitToggle from '../UnitToggle/UnitToggle';
 
 const WeatherDisplayFunctions = (props) => {
 
-    const {weather, unitType, setUnitType, previousData, weatherObject, setWeatherObject} = props;
+    const {weather, 
+        unitType, 
+        setUnitType, 
+        weatherObject, 
+        setWeatherObject} = props;
+    
+    const [previousWeatherDataObject, setPreviousWeatherDataObject] = useState(null);
+    
+    const getPreviousResults = () => { // fetches historic weather data from API and local database
+        fetch(`http://192.168.56.1:3020/weather/${weather.id}`)
+        .then((response) => {
+            return response.json();
+        }).then((previousWeatherData) => {
+            setPreviousWeatherDataObject({
+                "mainTemp": previousWeatherData["tempMain"],
+                "feelsLikeTemp": previousWeatherData["tempFeelsLike"],
+                "highTemp": previousWeatherData["tempHigh"],
+                "lowTemp": previousWeatherData["tempLow"],
+                "visibility": previousWeatherData["visibility"],
+                "windSpeed": previousWeatherData["windSpeed"],
+                "windDirection": previousWeatherData["windDirection"],
+                "windGust": previousWeatherData["windGustSpeed"]
+            });
+            console.log(previousWeatherData)
+        });
+        };
+    
+    useEffect(getPreviousResults, [weather]);
+
+    const kelvinToFahrenheit = (temp) => {
+        return ((temp - 273.15)*9/5+32).toFixed() + "°F"
+    }
+    const kelvinToCelsius = (temp) => {
+        return (temp - 273.15).toFixed() + "°C"
+    }
+    const metersToFeet = (distance) => {
+        return distance * 3.281 + " feet"
+    }
+    const msToMPH = (speed) => {
+        return (speed * 2.237).toFixed() + " MPH"
+    };
 
     const unitConverter = () => {
         if (unitType === true) { // fahrenheit
             setWeatherObject({
                 ...weatherObject,
-                "mainTemp": ((weather.main.temp - 273.15)*9/5+32).toFixed() + "°F",
-                "feelsLikeTemp": ((weather.main.feels_like - 273.15)*9/5+32).toFixed() + "°F",
-                "highTemp": ((weather.main.temp_max - 273.15)*9/5+32).toFixed() + "°F",
-                "lowTemp": ((weather.main.temp_min - 273.15)*9/5+32).toFixed() + "°F",
-                "visibility": (weather.visibility)*3.281 + " feet",
-                "windSpeed": ((weather.wind.speed)*2.237).toFixed() + "MPH",
-                "windGust": ((weather.wind.gust)*2.237).toFixed() + "MPH"
-            })
+                "mainTemp": kelvinToFahrenheit(weather.main.temp),
+                "feelsLikeTemp": kelvinToFahrenheit(weather.main.feels_like),
+                "highTemp": kelvinToFahrenheit(weather.main.temp_max),
+                "lowTemp": kelvinToFahrenheit(weather.main.temp_min),
+                "visibility": metersToFeet(weather.visibility),
+                "windSpeed": msToMPH(weather.wind.speed),
+                "windGust": msToMPH(weather.wind.gust)
+            });
         } else if (unitType === false) { // celsius
             setWeatherObject({
                 ...weatherObject,
-                "mainTemp": (weather.main.temp - 273.15).toFixed() + "°C",
-                "feelsLikeTemp": (weather.main.feels_like - 273.15).toFixed() + "°C",
-                "highTemp": (weather.main.temp_max - 273.15).toFixed() + "°C",
-                "lowTemp": (weather.main.temp_min - 273.15).toFixed() + "°C",
+                "mainTemp": kelvinToCelsius(weather.main.temp),
+                "feelsLikeTemp": kelvinToCelsius(weather.main.feels_like),
+                "highTemp": kelvinToCelsius(weather.main.temp_max),
+                "lowTemp": kelvinToCelsius(weather.main.temp_min),
                 "visibility": (weather.visibility) + " meters",
                 "windSpeed": (weather.wind.speed).toFixed() + "m/s",
                 "windGust": weather.wind.gust + "m/s"
-            })
+            });
         }
-    }
+    };
 
-    useEffect(unitConverter, [unitType])
+    useEffect(unitConverter, [unitType]);
 
     const windDirectionConverter = () => {
         switch (weather.wind.deg) {
@@ -89,43 +129,9 @@ const WeatherDisplayFunctions = (props) => {
                     "windDirection": weatherObject["windDirection"],
                 })
         }
-    }
+    };
 
-    useEffect(windDirectionConverter)
-
-    const addNewWeather = () => {
-        fetch("http://192.168.56.1:3020/weather/newweather",{
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(jsonData)
-        }) .then((res) => {
-            console.log(res)
-        }) .catch((err) => {
-                console.log(err)
-        })
-    }
-
-    const jsonData = {
-            cityId: weather.id,
-            nameCity: weather.name,
-            nameCountry: weather.sys.country,
-            weatherMain: weather.weather[0].main,
-            weatherDescription: weather.weather[0].description,
-            tempMain: weather.main.temp,
-            tempHigh: weather.main.temp_max,
-            tempLow: weather.main.temp_min,
-            tempFeelsLike: weather.main.feels_like,
-            humidity: weather.main.humidity,
-            visibility: weather.visibility,
-            windDirection: weather.wind.deg,
-            windSpeed: weather.wind.speed,
-            windGustSpeed: weather.wind.gust
-        }
-
-    useEffect(addNewWeather, [jsonData])
+    useEffect(windDirectionConverter, [weather]);
 
     return (
         <div className="toggle_card">
@@ -142,6 +148,16 @@ const WeatherDisplayFunctions = (props) => {
                         <p>Wind: Direction: {weatherObject["windDirection"]} | Speed: {weatherObject["windSpeed"]}</p>
                         {weather.wind.gust && <p>Wind Gusts: {weatherObject["windGust"]}</p>}
                     </div>
+                    {/* {previousData !== null ? <div className="cards">
+                        <h2>Previous result from {previousData.createdAt.slice(0,10)}</h2>
+                        <h2>{previousData.nameCity}, {previousData.nameCountry}</h2>
+                        <h3>{previousData.weatherMain}, {previousData.weatherDescription}</h3>
+                        <p>{mainTemp}, feels like {feelsLikeTemp} | Range: {highTemp} - {lowTemp}</p>
+                        <p>Humidity: {previousData.humidity}%</p>
+                        <p>Visibility: {visibility}</p>
+                        <p>Wind Direction: {windDirection} | Wind Speed: {windSpeed}</p>
+                        {previousData.windGustSpeed && <p>Wind Gusts: {windGust}</p>}
+                    </div> : ''} */}
                 </div>
     )
 }

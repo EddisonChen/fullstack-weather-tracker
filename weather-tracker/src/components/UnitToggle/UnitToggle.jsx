@@ -1,14 +1,13 @@
 import "./UnitToggle.scss";
-import {useState, useEffect} from "react";
 
 const UnitToggle = (props) => {
 
-    const {setUnitType, unitType, unitConverter} = props
+    const {setUnitType, unitType, unitConverter} = props;
 
     const handleToggleClick = () => {
-        setUnitType(!unitType)
-        console.log(unitType)
-        unitConverter()
+        setUnitType(!unitType);
+        console.log(unitType);
+        unitConverter();
     }
 
     return (
