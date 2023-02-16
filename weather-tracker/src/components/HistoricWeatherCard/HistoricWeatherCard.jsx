@@ -73,7 +73,7 @@ const HistoricWeatherCard = (props) => {
                 <p>{mainTemp}, feels like {feelsLikeTemp} | Range: {highTemp} - {lowTemp}</p>
                 <p>Humidity: {previousData.humidity}%</p>
                 <p>Visibility: {visibility}</p>
-                <p>Wind Direction: {windDirection} Wind Speed: {windSpeed}</p>
+                <p>Wind Direction: {windDirection} | Wind Speed: {windSpeed}</p>
                 {previousData.windGustSpeed && <p>Wind Gusts: {windGust}</p>}
             </div>
         </div>

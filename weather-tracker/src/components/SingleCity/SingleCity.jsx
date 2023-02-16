@@ -3,9 +3,9 @@ import { useEffect } from "react";
 
 const SingleCity = (props) => {
 
-    const {name, state, country, id, setCityId, getWeather, addNewCityWeather, setCityName} = props;
+    const {name, state, country, id, setCityId, getWeather, setCityName} = props;
 
-    const handleCityCardClick = () => {
+    const handleCityCardClick = () => { //runs getWeather, clears cityName, and sets cityId upon clicking a city
         getWeather()
         setCityName("")
         setCityId(id)

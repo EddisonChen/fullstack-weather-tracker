@@ -8,11 +8,8 @@ function App() {
 
   const [cityId, setCityId] = useState("");
   const [weather, setWeather] = useState();
-  const [jsonData, setJsonData] = useState()
 
-  console.log(cityId)
-
-  const getWeather = () => {
+  const getWeather = () => { // fetch request to get weather data from 3rd party API
     if  (cityId !== "") {
         fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${api_key}`)
       .then((response) => {
@@ -23,19 +20,22 @@ function App() {
     } else {}
   }
 
-  useEffect(getWeather, [cityId])
-
-  console.log(weather)
+  useEffect(getWeather, [cityId]) // runs getWeather when cityID is updated
 
   return (
     <>
       <h1 className="title">WEATHERPRO</h1>
       <div className="body">
         <div className="search">
-          <SearchWeather setCityId={setCityId} getWeather={getWeather} weather={weather}/>
+          <SearchWeather 
+            setCityId={setCityId} 
+            getWeather={getWeather} 
+            weather={weather}/>
         </div>
         <div className="weather_cards">
-          {weather && <ShowWeather weather={weather} cityId={cityId} jsonData={jsonData} setJsonData={setJsonData}/>}
+          {weather && <ShowWeather 
+            weather={weather}
+            />}
         </div>
       </div>
     </>

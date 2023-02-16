@@ -1,126 +1,185 @@
 import "./ShowWeather.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import UnitToggle from "../../components/UnitToggle/UnitToggle";
 import HistoricWeather from "../HistoricWeather/HistoricWeather";
+import WeatherDisplayFunctions from "../../components/WeatherDisplayFunctions/WeatherDisplayFunctions"
 
 const ShowWeather = (props) => {
 
     const {weather} = props;
 
     const [unitType, setUnitType] = useState(false)
-    
-    const [mainTemp, setMainTemp] = useState(weather.main.temp);
-    const [feelsLikeTemp, setFeelsLikeTemp] = useState(weather.main.feels_like);
-    const [highTemp, setHighTemp] = useState(weather.main.temp_max);
-    const [lowTemp, setLowTemp] = useState(weather.main.temp_min);
-    const [visibility, setVisibility] = useState(weather.visibility);
-    const [windSpeed, setWindSpeed] = useState(weather.wind.speed);
-    const [windDirection, setWindDirection] = useState(weather.wind.deg);
-    const [windGust, setWindGust] = useState(weather.wind.gust);
+    const [previousData, setPreviousData] = useState()
+    const [weatherObject, setWeatherObject] = useState({
+        "mainTemp": weather.main.temp,
+        "feelsLikeTemp": weather.main.feels_like,
+        "highTemp": weather.main.temp_max,
+        "lowTemp": weather.main.temp_min,
+        "visibility": weather.visibility,
+        "windSpeed": weather.wind.speed,
+        "windDirection": weather.wind.deg,
+        "windGust": weather.wind.gust
+    })
 
-    //change this to an object
-
-    const unitConverter = () => {
-        if (unitType === true) { // fahrenheit
-            setMainTemp(((weather.main.temp - 273.15)*9/5+32).toFixed() + "°F");
-            setFeelsLikeTemp(((weather.main.feels_like - 273.15)*9/5+32).toFixed() + "°F");
-            setHighTemp(((weather.main.temp_max - 273.15)*9/5+32).toFixed() + "°F");
-            setLowTemp(((weather.main.temp_min - 273.15)*9/5+32).toFixed() + "°F");
-            setVisibility((weather.visibility)*3.281 + " feet");
-            setWindSpeed(((weather.wind.speed)*2.237).toFixed() + "MPH");
-            setWindGust(((weather.wind.gust)*2.237).toFixed() + "MPH");
-        } else if (unitType === false) { // celsius
-            setMainTemp((weather.main.temp - 273.15).toFixed() + "°C");
-            setFeelsLikeTemp((weather.main.feels_like - 273.15).toFixed() + "°C");
-            setHighTemp((weather.main.temp_max - 273.15).toFixed() + "°C");
-            setLowTemp((weather.main.temp_min - 273.15).toFixed() + "°C");
-            setVisibility((weather.visibility) + " meters");
-            setWindSpeed((weather.wind.speed).toFixed() + "m/s");
-            setWindGust(weather.wind.gust + "m/s");
-        }
-    }
-
-    useEffect(unitConverter, [unitType])
-
-    const windDirectionConverter = () => {
-        if (weather.wind.deg > 337.5 || weather.wind.deg < 22.5) {
-            setWindDirection("North");
-        } else if (weather.wind.deg > 22.5 && weather.wind.deg < 67.5) {
-            setWindDirection("Northeast");
-        } else if (weather.wind.deg > 67.5 && weather.wind.deg < 112.5) {
-            setWindDirection("East");
-        } else if (weather.wind.deg > 112.5 && weather.wind.deg < 157.5) {
-            setWindDirection("Southeast");
-        } else if (weather.wind.deg > 157.5 && weather.wind.deg < 202.5) {
-            setWindDirection("South");
-        } else if (weather.wind.deg > 202.5 && weather.wind.deg < 247.5) {
-            setWindDirection("Southwest"); 
-        } else if (weather.wind.deg > 247.5 && weather.wind.deg < 292.5) {
-            setWindDirection("West"); 
-        } else if (weather.wind.deg > 292.5 && weather.wind.deg < 337.5) {
-            setWindDirection("Northwest"); 
-        }
-    }
-    // change this to switch statement
-
-    useEffect(windDirectionConverter)
-
-    const addNewWeather = () => {
-        fetch("http://192.168.56.1:3020/weather/newweather",{
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(jsonData)
-        }) .then((res) => {
-            console.log(res)
-        }) .catch((err) => {
-                console.log(err)
+    const getPreviousResults = () => {
+        fetch(`http://192.168.56.1:3020/weather/${weather.id}`)
+        .then((response) => {
+            return response.json()
+        }).then((previousWeatherData) => {
+            setPreviousData(previousWeatherData)
+            console.log(previousWeatherData)
         })
     }
 
-    const jsonData = {
-            cityId: weather.id,
-            nameCity: weather.name,
-            nameCountry: weather.sys.country,
-            weatherMain: weather.weather[0].main,
-            weatherDescription: weather.weather[0].description,
-            tempMain: weather.main.temp,
-            tempHigh: weather.main.temp_max,
-            tempLow: weather.main.temp_min,
-            tempFeelsLike: weather.main.feels_like,
-            humidity: weather.main.humidity,
-            visibility: weather.visibility,
-            windDirection: weather.wind.deg,
-            windSpeed: weather.wind.speed,
-            windGustSpeed: weather.wind.gust
-        }
+    useEffect(getPreviousResults, [weather])
 
-    console.log(jsonData)
+    // const unitConverter = () => {
+    //     if (unitType === true) { // fahrenheit
+    //         setWeatherObject({
+    //             ...weatherObject,
+    //             "mainTemp": ((weather.main.temp - 273.15)*9/5+32).toFixed() + "°F",
+    //             "feelsLikeTemp": ((weather.main.feels_like - 273.15)*9/5+32).toFixed() + "°F",
+    //             "highTemp": ((weather.main.temp_max - 273.15)*9/5+32).toFixed() + "°F",
+    //             "lowTemp": ((weather.main.temp_min - 273.15)*9/5+32).toFixed() + "°F",
+    //             "visibility": (weather.visibility)*3.281 + " feet",
+    //             "windSpeed": ((weather.wind.speed)*2.237).toFixed() + "MPH",
+    //             "windGust": ((weather.wind.gust)*2.237).toFixed() + "MPH"
+    //         })
+    //     } else if (unitType === false) { // celsius
+    //         setWeatherObject({
+    //             ...weatherObject,
+    //             "mainTemp": (weather.main.temp - 273.15).toFixed() + "°C",
+    //             "feelsLikeTemp": (weather.main.feels_like - 273.15).toFixed() + "°C",
+    //             "highTemp": (weather.main.temp_max - 273.15).toFixed() + "°C",
+    //             "lowTemp": (weather.main.temp_min - 273.15).toFixed() + "°C",
+    //             "visibility": (weather.visibility) + " meters",
+    //             "windSpeed": (weather.wind.speed).toFixed() + "m/s",
+    //             "windGust": weather.wind.gust + "m/s"
+    //         })
+    //     }
+    // }
 
-    useEffect(addNewWeather, [jsonData])
+    // useEffect(unitConverter, [unitType])
+
+    // const windDirectionConverter = () => {
+    //     switch (weather.wind.deg) {
+    //         case weather.wind.deg > 337.5 || weather.wind.deg < 22.5:
+    //             setWeatherObject({
+    //                 ...weatherObject,
+    //                 "windDirection": "North",
+    //             })
+    //             break;
+    //         case weather.wind.deg > 22.5 && weather.wind.deg < 67.5:
+    //             setWeatherObject({
+    //                 ...weatherObject,
+    //                 "windDirection": "Northeast",
+    //             })
+    //             break;
+    //         case weather.wind.deg > 67.5 && weather.wind.deg < 112.5:
+    //             setWeatherObject({
+    //                 ...weatherObject,
+    //                 "windDirection": "East",
+    //             })
+    //             break;
+    //         case weather.wind.deg > 112.5 && weather.wind.deg < 157.5:
+    //             setWeatherObject({
+    //                 ...weatherObject,
+    //                 "windDirection": "Southeast",
+    //             })
+    //             break;
+    //         case weather.wind.deg > 157.5 && weather.wind.deg < 202.5:
+    //             setWeatherObject({
+    //                 ...weatherObject,
+    //                 "windDirection": "South",
+    //             })
+    //             break;
+    //         case weather.wind.deg > 202.5 && weather.wind.deg < 247.5:
+    //             setWeatherObject({
+    //                 ...weatherObject,
+    //                 "windDirection": "Southwest",
+    //             })
+    //             break;
+    //         case weather.wind.deg > 247.5 && weather.wind.deg < 292.5:
+    //             setWeatherObject({
+    //                 ...weatherObject,
+    //                 "windDirection": "West",
+    //             })
+    //             break;
+    //         case weather.wind.deg > 292.5 && weather.wind.deg < 337.5:
+    //             setWeatherObject({
+    //                 ...weatherObject,
+    //                 "windDirection": "Northwest",
+    //             })
+    //             break;
+    //         default:
+    //             setWeatherObject({
+    //                 ...weatherObject,
+    //                 "windDirection": weatherObject["windDirection"],
+    //             })
+    //     }
+    // }
+
+    // useEffect(windDirectionConverter)
+
+    // const addNewWeather = () => {
+    //     fetch("http://192.168.56.1:3020/weather/newweather",{
+    //         method: "POST",
+    //         headers: {
+    //             "Accept": "application/json",
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(jsonData)
+    //     }) .then((res) => {
+    //         console.log(res)
+    //     }) .catch((err) => {
+    //             console.log(err)
+    //     })
+    // }
+
+    // const jsonData = {
+    //         cityId: weather.id,
+    //         nameCity: weather.name,
+    //         nameCountry: weather.sys.country,
+    //         weatherMain: weather.weather[0].main,
+    //         weatherDescription: weather.weather[0].description,
+    //         tempMain: weather.main.temp,
+    //         tempHigh: weather.main.temp_max,
+    //         tempLow: weather.main.temp_min,
+    //         tempFeelsLike: weather.main.feels_like,
+    //         humidity: weather.main.humidity,
+    //         visibility: weather.visibility,
+    //         windDirection: weather.wind.deg,
+    //         windSpeed: weather.wind.speed,
+    //         windGustSpeed: weather.wind.gust
+    //     }
+
+    // useEffect(addNewWeather, [jsonData])
 
         return (
-            <div>
-                <div className="both_cards">
-                    <div className="toggle_card">
-                        <div className="toggle">
-                            <UnitToggle 
+            <div className="both_cards">
+                {/* <div className="toggle_card">
+                    <div className="toggle">
+                        <UnitToggle 
                             setUnitType={setUnitType} unitType={unitType} unitConverter={unitConverter}/>
-                        </div>
-                        <div className="cards">
-                            <h2>{weather.name}, {weather.sys.country}</h2>
-                            <h3>{weather.weather[0].main}, {weather.weather[0].description}</h3>
-                            <p>{mainTemp}, feels like {feelsLikeTemp} | Range: {highTemp} - {lowTemp}</p>
-                            <p>Humidity: {weather.main.humidity}%</p>
-                            <p>Visibility: {visibility}</p>
-                            <p>Wind: Direction: {windDirection} Speed: {windSpeed}</p>
-                            {weather.wind.gust && <p>Wind Gusts: {windGust}</p>}
-                        </div>
                     </div>
-                    <HistoricWeather weather={weather}/>
-                </div>
+                    <div className="cards">
+                        <h2>{weather.name}, {weather.sys.country}</h2>
+                        <h3>{weather.weather[0].main}, {weather.weather[0].description}</h3>
+                        <p>{weatherObject["mainTemp"]}, feels like {weatherObject["feelsLikeTemp"]} | Range: {weatherObject["highTemp"]} - {weatherObject["lowTemp"]}</p>
+                        <p>Humidity: {weather.main.humidity}%</p>
+                        <p>Visibility: {weatherObject["visibility"]}</p>
+                        <p>Wind: Direction: {weatherObject["windDirection"]} | Speed: {weatherObject["windSpeed"]}</p>
+                        {weather.wind.gust && <p>Wind Gusts: {weatherObject["windGust"]}</p>}
+                    </div>
+                </div> */}
+                <HistoricWeather weather={weather}/>
+                <WeatherDisplayFunctions
+                    weather = {weather}
+                    unitType = {unitType}
+                    setUnitType = {setUnitType}
+                    previousData = {previousData}
+                    weatherObject = {weatherObject}
+                    setWeatherObject = {setWeatherObject}/>
             </div>
         )
 
