@@ -54,7 +54,7 @@ const WeatherDisplayFunctions = (props) => {
 
     useEffect(unitConverter, [unitType])
 
-    const windDirectionConverter = () => {
+    const windDirectionConverter = () => { //converts wind direction based on degree
         if (weather.wind.deg > 337.5 || weather.wind.deg < 22.5) {
           setWeatherObject({
             ...weatherObject,

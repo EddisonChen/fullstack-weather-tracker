@@ -11,15 +11,12 @@ const UnitToggle = (props) => {
     }
 
     return (
-        <div>
-            <div className="toggle_button">
-                <label className="switch">
-                    <input type="checkbox" onClick={handleToggleClick}/>
-                    <span className="slider round"></span>
-                </label>
-            </div>
+        <div className="toggle_button">
+            <label className="switch">
+                <input type="checkbox" onClick={handleToggleClick}/>
+                <span className="slider round"></span>
+            </label>
         </div>
-        
     )
 }
 

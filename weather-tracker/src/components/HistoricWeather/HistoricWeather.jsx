@@ -101,14 +101,14 @@ const HistoricWeather = (props) => {
 
       return (
         <div className="cards">
-                <h2>Previous result from {previousData.createdAt.slice(0, 10)}</h2>
-                <h2>{previousData.nameCity}, {previousData.nameCountry}</h2>
-                <h3>{previousData.weatherMain}, {previousData.weatherDescription}</h3>
-                <p>{previousWeatherDataObject.tempMain}, feels like {previousWeatherDataObject.tempFeelsLike} | Range: {previousWeatherDataObject.tempHigh} - {previousWeatherDataObject.tempLow}</p>
-                <p>Humidity: {previousData.humidity}%</p>
-                <p>Visibility: {previousWeatherDataObject.visibility}</p>
-                <p>Wind Direction: {previousWeatherDataObject.windDirection} | Wind Speed: {previousWeatherDataObject.windSpeed}</p>
-            </div>
+            <h2>Previous result from {previousData.createdAt.slice(0, 10)}</h2>
+            <h2>{previousData.nameCity}, {previousData.nameCountry}</h2>
+            <h3>{previousData.weatherMain}, {previousData.weatherDescription}</h3>
+            <p>{previousWeatherDataObject.tempMain}, feels like {previousWeatherDataObject.tempFeelsLike} | Range: {previousWeatherDataObject.tempHigh} - {previousWeatherDataObject.tempLow}</p>
+            <p>Humidity: {previousData.humidity}%</p>
+            <p>Visibility: {previousWeatherDataObject.visibility}</p>
+            <p>Wind Direction: {previousWeatherDataObject.windDirection} | Wind Speed: {previousWeatherDataObject.windSpeed}</p>
+        </div>
       )
 }
 

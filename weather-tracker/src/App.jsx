@@ -9,7 +9,6 @@ function App() {
   const [cityId, setCityId] = useState("");
   const [weather, setWeather] = useState();
   
-
   const getWeather = () => { // fetch request to get weather data from 3rd party API
     if  (cityId !== "") {
         fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${api_key}`)

@@ -15,7 +15,7 @@ const CityCard = (props) => {
                 setCityId={setCityId}
                 getWeather={getWeather}
                 setCityName={setCityName}
-                />
+            />
         )
     });
 

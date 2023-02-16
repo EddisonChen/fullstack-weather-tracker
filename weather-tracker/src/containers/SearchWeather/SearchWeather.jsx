@@ -32,12 +32,12 @@ const SearchWeather = (props) => {
                 </input>
             </div>
             <CityCard 
-            filteredCities={filteredCities}
-            setCityId={setCityId}
-            getWeather={getWeather} 
-            weather={weather}
-            setCityName={setCityName}
-            className="city_card"/>
+                filteredCities={filteredCities}
+                setCityId={setCityId}
+                getWeather={getWeather} 
+                weather={weather}
+                setCityName={setCityName}
+                className="city_card"/>
         </div>
     )
 
