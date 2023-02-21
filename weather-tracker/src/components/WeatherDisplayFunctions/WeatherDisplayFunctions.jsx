@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import UnitToggle from '../UnitToggle/UnitToggle';
 import HistoricWeather from '../HistoricWeather/HistoricWeather'
 
@@ -19,14 +19,14 @@ const WeatherDisplayFunctions = (props) => {
         return (temp - 273.15).toFixed() + "°C"
     }
     const metersToFeet = (distance) => {
-        return distance * 3.281 + " feet"
+        return (distance * 3.281).toFixed() + " feet"
     }
     const msToMPH = (speed) => {
         return (speed * 2.237).toFixed() + " MPH"
     };
 
     const unitConverter = () => {
-        if (unitType === true) { // fahrenheit
+        if (unitType === true) { // imperial
             setWeatherObject({
                 ...weatherObject,
                 tempMain: kelvinToFahrenheit(weather.main.temp),
@@ -38,7 +38,7 @@ const WeatherDisplayFunctions = (props) => {
                 windGustSpeed: msToMPH(weather.wind.gust)
             });
             
-        } else if (unitType === false) { // celsius
+        } else if (unitType === false) { // metric
             setWeatherObject({
                 ...weatherObject,
                 tempMain: kelvinToCelsius(weather.main.temp),
@@ -117,7 +117,7 @@ const WeatherDisplayFunctions = (props) => {
                 <p>{weatherObject.tempMain}, feels like {weatherObject.tempFeelsLike} | Range: {weatherObject.tempHigh} - {weatherObject.tempLow}</p>
                 <p>Humidity: {weather.main.humidity}%</p>
                 <p>Visibility: {weatherObject.visibility}</p>
-                <p>Wind: Direction: {weatherObject.windDirection} | Speed: {weatherObject.windSpeed}</p>
+                <p>Wind: Direction: {weatherObject.windDirection} | Wind Speed: {weatherObject.windSpeed}</p>
             </div>
             {previousData && <HistoricWeather
                 previousData={previousData}
@@ -126,7 +126,8 @@ const WeatherDisplayFunctions = (props) => {
                 msToMPH={msToMPH}
                 metersToFeet={metersToFeet}
                 unitType={unitType}
-                setPreviousData={setPreviousData}/>}
+                setPreviousData={setPreviousData}
+                weather = {weather}/>}
         </div>
     )
 }

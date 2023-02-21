@@ -7,7 +7,7 @@ const UnitToggle = (props) => {
     const handleToggleClick = () => {
         setUnitType(!unitType);
         console.log(unitType);
-        unitConverter();
+        // unitConverter();
     }
 
     return (

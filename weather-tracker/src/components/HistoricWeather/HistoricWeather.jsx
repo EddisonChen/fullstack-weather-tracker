@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 
 const HistoricWeather = (props) => {
 
-    const {previousData, kelvinToCelsius, kelvinToFahrenheit, msToMPH, metersToFeet, unitType} = props;
+    const {previousData, kelvinToCelsius, kelvinToFahrenheit, msToMPH, metersToFeet, unitType, weather} = props;
 
     const [previousWeatherDataObject, setPreviousWeatherDataObject] = useState({
         tempMain: previousData.tempMain,
@@ -40,13 +40,13 @@ const HistoricWeather = (props) => {
                 tempHigh: kelvinToCelsius(previousData.tempHigh),
                 tempLow: kelvinToCelsius(previousData.tempLow),
                 visibility: previousData.visibility + " meters",
-                windSpeed: previousData.windSpeed + "m/s",
+                windSpeed: (previousData.windSpeed).toFixed() + "m/s",
                 windGust: previousData.windGust + "m/s"
             })
         }
     }
 
-    useEffect(unitConverter, [unitType, previousData])
+    useEffect(unitConverter, [unitType])
 
     const windDirectionConverter = () => {
         if (previousData.windDirection > 337.5 || previousData.windDirection < 22.5) {
