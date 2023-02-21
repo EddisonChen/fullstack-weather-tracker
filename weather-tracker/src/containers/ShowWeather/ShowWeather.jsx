@@ -34,7 +34,7 @@ const ShowWeather = (props) => {
     
     useEffect(getPreviousResults, [weather.id]);
 
-    const addNewWeather = () => {
+    const addNewWeather = () => { // adds new searched weather into local DB
         fetch("http://192.168.56.1:3020/weather/newweather",{
             method: "POST",
             headers: {
@@ -66,7 +66,7 @@ const ShowWeather = (props) => {
         windGustSpeed: weather.wind.gust
     };
 
-    useEffect(addNewWeather, [jsonData])
+    useEffect(addNewWeather, [weather.id])
 
         return (
             <div className="both_cards">

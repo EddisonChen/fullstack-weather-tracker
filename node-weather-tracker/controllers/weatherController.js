@@ -36,8 +36,9 @@ export const getCityWeatherById = (req, res) => {
     const cityId = parseInt(req.params.cityId);
     CityWeather.findOne({
         where: {
-            cityId: cityId
-        }
+            cityId: cityId, 
+        },
+        order: [['id', 'DESC']]
     })
     .then(cityWeathers => {
         res.status(200).send(cityWeathers)
