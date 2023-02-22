@@ -40,13 +40,11 @@ const ShowWeather = (props) => {
     });
     
     const getPreviousResults = () => { // fetches historic weather data from API and local database
-        console.log(weather.name)
         fetch(`http://192.168.56.1:3020/weather/${weather.id}`)
         .then((response) => {
             return response.json();
         }).then((historicWeatherData) => {
             setPreviousData(historicWeatherData)
-            console.log(historicWeatherData)
         }).catch(() => {
             setPreviousData()
         })

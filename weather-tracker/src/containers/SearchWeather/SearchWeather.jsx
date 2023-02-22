@@ -1,5 +1,5 @@
 import "./SearchWeather.scss";
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import cityIdDatas from "../../cityIdData/city.list.json";
 import CityCard from "../../components/CityCard/CityCard";
 

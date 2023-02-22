@@ -23,8 +23,7 @@ export const addCityWeather = (req, res) => {
         humidity: req.body.humidity,
         visibility: req.body.visibility,
         windDirection: req.body.windDirection,
-        windSpeed: req.body.windSpeed,
-        windGustSpeed: req.body.windGustSpeed
+        windSpeed: req.body.windSpeed
     }) .then(() => {
         res.status(201).send({message: "weather added"})
     }) .catch((err => {
