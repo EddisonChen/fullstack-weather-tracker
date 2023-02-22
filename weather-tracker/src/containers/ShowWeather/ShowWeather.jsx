@@ -6,17 +6,38 @@ const ShowWeather = (props) => {
 
     const {weather} = props;
 
-    const [unitType, setUnitType] = useState(false)
+    const [unitType, setUnitType] = useState(false);
+
+    const windDirectionConverter = (windDegree) => {
+        if (windDegree > 337.5 || windDegree < 22.5) {
+          return "North";
+        } else if (windDegree > 22.5 && windDegree < 67.5) {
+            return "Northeast";
+        } else if (windDegree > 67.5 && windDegree < 112.5) {
+            return "East";
+        } else if (windDegree > 112.5 && windDegree < 157.5) {
+            return "Southeast";
+        } else if (windDegree > 157.5 && windDegree < 202.5) {
+          return "South";
+        } else if (windDegree > 202.5 && windDegree < 247.5) {
+            return "Southwest";
+        } else if (windDegree > 247.5 && windDegree < 292.5) {
+            return "West";
+        } else if (windDegree > 292.5 && windDegree < 337.5) {
+            return "Northwest";
+        } 
+      };
+
     const [weatherObject, setWeatherObject] = useState({
-        "tempMain": weather.main.temp,
-        "tempFeelsLike": weather.main.feels_like,
-        "tempHigh": weather.main.temp_max,
-        "tempLow": weather.main.temp_min,
-        "visibility": weather.visibility,
-        "windSpeed": weather.wind.speed,
-        "windDirection": weather.wind.deg,
-        "windGustSpeed": weather.wind.gust
-    })
+        tempMain: weather.main.temp,
+        tempFeelsLike: weather.main.feels_like,
+        tempHigh: weather.main.temp_max,
+        tempLow: weather.main.temp_min,
+        visibility: weather.visibility,
+        windSpeed: weather.wind.speed,
+        windDirection: windDirectionConverter(weather.wind.deg),
+        windGustSpeed: weather.wind.gust
+    });
     const [previousData, setPreviousData] = useState();
 
     const getPreviousResults = () => { // fetches historic weather data from API and local database
@@ -30,7 +51,7 @@ const ShowWeather = (props) => {
         }).catch(() => {
             setPreviousData()
         })
-        };
+    };
     
     useEffect(getPreviousResults, [weather.id]);
 
@@ -61,12 +82,12 @@ const ShowWeather = (props) => {
         tempFeelsLike: weather.main.feels_like,
         humidity: weather.main.humidity,
         visibility: weather.visibility,
-        windDirection: weather.wind.deg,
+        windDirection: windDirectionConverter(weather.wind.deg),
         windSpeed: weather.wind.speed,
         windGustSpeed: weather.wind.gust
     };
 
-    useEffect(addNewWeather, [weather.id])
+    useEffect(addNewWeather, [weather.id]);
 
         return (
             <div className="both_cards">

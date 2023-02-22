@@ -37,7 +37,6 @@ const WeatherDisplayFunctions = (props) => {
                 windSpeed: msToMPH(weather.wind.speed),
                 windGustSpeed: msToMPH(weather.wind.gust)
             });
-            
         } else if (unitType === false) { // metric
             setWeatherObject({
                 ...weatherObject,
@@ -52,58 +51,7 @@ const WeatherDisplayFunctions = (props) => {
         }
     };
 
-    useEffect(unitConverter, [unitType])
-
-    const windDirectionConverter = () => { //converts wind direction based on degree
-        if (weather.wind.deg > 337.5 || weather.wind.deg < 22.5) {
-          setWeatherObject({
-            ...weatherObject,
-            windDirection: "North",
-          });
-        } else if (weather.wind.deg > 22.5 && weather.wind.deg < 67.5) {
-          setWeatherObject({
-            ...weatherObject,
-            windDirection: "Northeast",
-          });
-        } else if (weather.wind.deg > 67.5 && weather.wind.deg < 112.5) {
-          setWeatherObject({
-            ...weatherObject,
-            windDirection: "East",
-          });
-        } else if (weather.wind.deg > 112.5 && weather.wind.deg < 157.5) {
-          setWeatherObject({
-            ...weatherObject,
-            windDirection: "Southeast",
-          });
-        } else if (weather.wind.deg > 157.5 && weather.wind.deg < 202.5) {
-          setWeatherObject({
-            ...weatherObject,
-            windDirection: "South",
-          });
-        } else if (weather.wind.deg > 202.5 && weather.wind.deg < 247.5) {
-          setWeatherObject({
-            ...weatherObject,
-            windDirection: "Southwest",
-          });
-        } else if (weather.wind.deg > 247.5 && weather.wind.deg < 292.5) {
-          setWeatherObject({
-            ...weatherObject,
-            windDirection: "West",
-          });
-        } else if (weather.wind.deg > 292.5 && weather.wind.deg < 337.5) {
-          setWeatherObject({
-            ...weatherObject,
-            windDirection: "Northwest",
-          });
-        } else {
-          setWeatherObject({
-            ...weatherObject,
-            windDirection: weatherObject["windDirection"],
-          });
-        }
-      };
-
-    useEffect(windDirectionConverter, [weather]);
+    useEffect(unitConverter, [unitType, weather]);
 
     return (
         <div className="toggle_card">

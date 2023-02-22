@@ -21,7 +21,7 @@ const HistoricWeather = (props) => {
     });
 
     const unitConverter = () => {
-        if (unitType == true) {
+        if (unitType === true) {
             setPreviousWeatherDataObject({
                 ...previousWeatherDataObject,
                 tempMain: kelvinToFahrenheit(previousData.tempMain),
@@ -44,60 +44,9 @@ const HistoricWeather = (props) => {
                 windGust: previousData.windGust + "m/s"
             })
         }
-    }
+    };
 
-    useEffect(unitConverter, [unitType])
-
-    const windDirectionConverter = () => {
-        if (previousData.windDirection > 337.5 || previousData.windDirection < 22.5) {
-          setPreviousWeatherDataObject({
-            ...previousWeatherDataObject,
-            windDirection: "North"
-          });
-        } else if (previousData.windDirection > 22.5 && previousData.windDirection < 67.5) {
-          setPreviousWeatherDataObject({
-            ...previousWeatherDataObject,
-            windDirection: "Northeast"
-          });
-        } else if (previousData.windDirection > 67.5 && previousData.windDirection < 112.5) {
-          setPreviousWeatherDataObject({
-            ...previousWeatherDataObject,
-            windDirection: "East"
-          });
-        } else if (previousData.windDirection > 112.5 && previousData.windDirection < 157.5) {
-          setPreviousWeatherDataObject({
-            ...previousWeatherDataObject,
-            windDirection: "Southeast"
-          });
-        } else if (previousData.windDirection > 157.5 && previousData.windDirection < 202.5) {
-          setPreviousWeatherDataObject({
-            ...previousWeatherDataObject,
-            windDirection: "South"
-          });
-        } else if (previousData.windDirection > 202.5 && previousData.windDirection < 247.5) {
-          setPreviousWeatherDataObject({
-            ...previousWeatherDataObject,
-            windDirection: "Southwest"
-          });
-        } else if (previousData.windDirection > 247.5 && previousData.windDirection < 292.5) {
-          setPreviousWeatherDataObject({
-            ...previousWeatherDataObject,
-            windDirection: "West"
-          });
-        } else if (previousData.windDirection > 292.5 && previousData.windDirection < 337.5) {
-          setPreviousWeatherDataObject({
-            ...previousWeatherDataObject,
-            windDirection: "Northwest"
-          });
-        } else {
-          setPreviousWeatherDataObject({
-            ...previousWeatherDataObject,
-            windDirection: null
-          });
-        }
-      };
-
-    useEffect(windDirectionConverter, [previousData]);
+    useEffect(unitConverter, [unitType, weather]);
 
       return (
         <div className="cards">
