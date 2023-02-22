@@ -14,13 +14,13 @@ const WeatherDisplayFunctions = (props) => {
 
     const kelvinToFahrenheit = (temp) => {
         return ((temp - 273.15)*9/5+32).toFixed() + "°F"
-    }
+    };
     const kelvinToCelsius = (temp) => {
         return (temp - 273.15).toFixed() + "°C"
-    }
+    };
     const metersToFeet = (distance) => {
         return (distance * 3.281).toFixed() + " feet"
-    }
+    };
     const msToMPH = (speed) => {
         return (speed * 2.237).toFixed() + " MPH"
     };
@@ -37,7 +37,7 @@ const WeatherDisplayFunctions = (props) => {
                 windSpeed: msToMPH(weather.wind.speed),
                 windGustSpeed: msToMPH(weather.wind.gust)
             });
-        } else if (unitType === false) { // metric
+        } else { // metric
             setWeatherObject({
                 ...weatherObject,
                 tempMain: kelvinToCelsius(weather.main.temp),
