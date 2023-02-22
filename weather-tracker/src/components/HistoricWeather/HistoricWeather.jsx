@@ -2,7 +2,13 @@ import {useState, useEffect} from 'react';
 
 const HistoricWeather = (props) => {
 
-    const {previousData, kelvinToCelsius, kelvinToFahrenheit, msToMPH, metersToFeet, unitType, weather} = props;
+    const {previousData,
+        kelvinToCelsius, 
+        kelvinToFahrenheit, 
+        msToMPH, 
+        metersToFeet, 
+        unitType, 
+        weather} = props;
 
     const [previousWeatherDataObject, setPreviousWeatherDataObject] = useState({
         tempMain: previousData.tempMain,
@@ -12,7 +18,6 @@ const HistoricWeather = (props) => {
         visibility: previousData.visibility,
         windSpeed: previousData.windSpeed,
         windDirection: previousData.windDirection,
-        windGustSpeed: previousData.windGustSpeed,
         nameCity: previousData.nameCity,
         nameCountry: previousData.nameCountry,
         weatherMain: previousData.weatherMain,
@@ -20,7 +25,7 @@ const HistoricWeather = (props) => {
         createdAt: previousData.createdAt
     });
 
-    const unitConverter = () => {
+    const historicUnitConverter = () => {
         if (unitType === true) {
             setPreviousWeatherDataObject({
                 ...previousWeatherDataObject,
@@ -29,8 +34,7 @@ const HistoricWeather = (props) => {
                 tempHigh: kelvinToFahrenheit(previousData.tempHigh),
                 tempLow: kelvinToFahrenheit(previousData.tempLow),
                 visibility: metersToFeet(previousData.visibility),
-                windSpeed: msToMPH(previousData.windSpeed),
-                windGustSpeed: msToMPH(previousData.windGust)
+                windSpeed: msToMPH(previousData.windSpeed)
             })
         } else {
             setPreviousWeatherDataObject({
@@ -40,15 +44,14 @@ const HistoricWeather = (props) => {
                 tempHigh: kelvinToCelsius(previousData.tempHigh),
                 tempLow: kelvinToCelsius(previousData.tempLow),
                 visibility: previousData.visibility + " meters",
-                windSpeed: (previousData.windSpeed).toFixed() + "m/s",
-                windGust: previousData.windGust + "m/s"
+                windSpeed: (previousData.windSpeed).toFixed() + "m/s"
             })
         }
     };
 
-    useEffect(unitConverter, [unitType, weather]);
+    useEffect(historicUnitConverter, [unitType, weather]);
 
-      return (
+    return (
         <div className="cards">
             <h2>Previous result from {previousData.createdAt.slice(0, 10)}</h2>
             <h2>{previousData.nameCity}, {previousData.nameCountry}</h2>
@@ -58,7 +61,7 @@ const HistoricWeather = (props) => {
             <p>Visibility: {previousWeatherDataObject.visibility}</p>
             <p>Wind Direction: {previousWeatherDataObject.windDirection} | Wind Speed: {previousWeatherDataObject.windSpeed}</p>
         </div>
-      )
+    )
 }
 
 export default HistoricWeather;

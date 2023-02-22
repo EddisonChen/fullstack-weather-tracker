@@ -2,7 +2,7 @@ import "./UnitToggle.scss";
 
 const UnitToggle = (props) => {
 
-    const {setUnitType, unitType, unitConverter} = props;
+    const {setUnitType, unitType} = props;
 
     const handleToggleClick = () => {
         setUnitType(!unitType);

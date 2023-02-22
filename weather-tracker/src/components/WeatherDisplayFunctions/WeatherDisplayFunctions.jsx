@@ -34,8 +34,7 @@ const WeatherDisplayFunctions = (props) => {
                 tempHigh: kelvinToFahrenheit(weather.main.temp_max),
                 tempLow: kelvinToFahrenheit(weather.main.temp_min),
                 visibility: metersToFeet(weather.visibility),
-                windSpeed: msToMPH(weather.wind.speed),
-                windGustSpeed: msToMPH(weather.wind.gust)
+                windSpeed: msToMPH(weather.wind.speed)
             });
         } else { // metric
             setWeatherObject({
@@ -45,8 +44,7 @@ const WeatherDisplayFunctions = (props) => {
                 tempHigh: kelvinToCelsius(weather.main.temp_max),
                 tempLow: kelvinToCelsius(weather.main.temp_min),
                 visibility: (weather.visibility) + " meters",
-                windSpeed: (weather.wind.speed).toFixed() + "m/s",
-                windGust: weather.wind.gust + "m/s"
+                windSpeed: (weather.wind.speed).toFixed() + "m/s"
             });
         }
     };
@@ -57,7 +55,7 @@ const WeatherDisplayFunctions = (props) => {
         <div className="toggle_card">
             <div className="toggle">
                 <UnitToggle 
-                    setUnitType={setUnitType} unitType={unitType} unitConverter={unitConverter}/>
+                    setUnitType={setUnitType} unitType={unitType}/>
             </div>
             <div className="cards">
                 <h2>{weather.name}, {weather.sys.country}</h2>

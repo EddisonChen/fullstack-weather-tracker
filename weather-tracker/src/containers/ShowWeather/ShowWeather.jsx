@@ -7,8 +7,9 @@ const ShowWeather = (props) => {
     const {weather} = props;
 
     const [unitType, setUnitType] = useState(false);
+    const [previousData, setPreviousData] = useState();
 
-    const windDirectionConverter = (windDegree) => {
+    const windDirectionConverter = (windDegree) => { // converts degrees to directions
         if (windDegree > 337.5 || windDegree < 22.5) {
           return "North";
         } else if (windDegree > 22.5 && windDegree < 67.5) {
@@ -26,7 +27,7 @@ const ShowWeather = (props) => {
         } else if (windDegree > 292.5 && windDegree < 337.5) {
             return "Northwest";
         } 
-      };
+    };
 
     const [weatherObject, setWeatherObject] = useState({
         tempMain: weather.main.temp,
@@ -35,11 +36,9 @@ const ShowWeather = (props) => {
         tempLow: weather.main.temp_min,
         visibility: weather.visibility,
         windSpeed: weather.wind.speed,
-        windDirection: windDirectionConverter(weather.wind.deg),
-        windGustSpeed: weather.wind.gust
+        windDirection: windDirectionConverter(weather.wind.deg)
     });
-    const [previousData, setPreviousData] = useState();
-
+    
     const getPreviousResults = () => { // fetches historic weather data from API and local database
         console.log(weather.name)
         fetch(`http://192.168.56.1:3020/weather/${weather.id}`)
@@ -83,8 +82,7 @@ const ShowWeather = (props) => {
         humidity: weather.main.humidity,
         visibility: weather.visibility,
         windDirection: windDirectionConverter(weather.wind.deg),
-        windSpeed: weather.wind.speed,
-        windGustSpeed: weather.wind.gust
+        windSpeed: weather.wind.speed
     };
 
     useEffect(addNewWeather, [weather.id]);
@@ -98,8 +96,7 @@ const ShowWeather = (props) => {
                     weatherObject = {weatherObject}
                     setWeatherObject = {setWeatherObject}
                     previousData = {previousData}
-                    setPreviousData={setPreviousData}
-                    />
+                />
             </div>
         )
 
