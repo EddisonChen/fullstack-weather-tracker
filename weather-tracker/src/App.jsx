@@ -41,7 +41,7 @@ function App() {
     } else if (windDegree > 292.5 && windDegree < 337.5) {
         return "Northwest";
     } 
-};
+  };
 
   return (
     <body>

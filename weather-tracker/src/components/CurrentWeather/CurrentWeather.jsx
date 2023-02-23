@@ -5,7 +5,6 @@ const CurrentWeather = (props) => {
 
     const {weather, 
         unitType, 
-        setUnitType, 
         weatherObject, 
         setWeatherObject,
         previousData,
@@ -24,7 +23,7 @@ const CurrentWeather = (props) => {
         return (speed * 2.237).toFixed() + " MPH"
     };
 
-    const unitConverter = () => { // simpler to convert from kelvin/metric to imperial/metric
+    const unitConverter = () => {
         if (unitType === true) { // imperial
             setWeatherObject({
                 ...weatherObject,

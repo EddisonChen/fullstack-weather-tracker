@@ -31,25 +31,24 @@ const ShowWeather = (props) => {
     
     useEffect(getPreviousResults, [weather.id]);
 
-        return (
-            <div>
-                <div className="toggle">
-                    <UnitToggle 
-                        setUnitType={setUnitType} 
-                        unitType={unitType}/>
-                </div>
-                <section>
-                    <CurrentWeather
-                        weather = {weather}
-                        unitType = {unitType}
-                        setUnitType = {setUnitType}
-                        weatherObject = {weatherObject}
-                        setWeatherObject = {setWeatherObject}
-                        previousData = {previousData}
-                    />
-                </section>
+    return (
+        <div>
+            <div className="toggle">
+                <UnitToggle 
+                    setUnitType={setUnitType} 
+                    unitType={unitType}/>
             </div>
-        )
+            <section>
+                <CurrentWeather
+                    weather = {weather}
+                    unitType = {unitType}
+                    weatherObject = {weatherObject}
+                    setWeatherObject = {setWeatherObject}
+                    previousData = {previousData}
+                />
+            </section>
+        </div>
+    )
 };
 
 export default ShowWeather;
