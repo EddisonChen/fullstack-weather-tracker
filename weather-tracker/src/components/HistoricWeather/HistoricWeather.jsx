@@ -7,8 +7,7 @@ const HistoricWeather = (props) => {
         kelvinToFahrenheit, 
         msToMPH, 
         metersToFeet, 
-        unitType, 
-        weather} = props;
+        unitType} = props;
 
     const [previousWeatherDataObject, setPreviousWeatherDataObject] = useState({
         tempMain: previousData.tempMain,
@@ -49,7 +48,9 @@ const HistoricWeather = (props) => {
         }
     };
 
-    useEffect(historicUnitConverter, [unitType, weather]);
+    console.log(previousData.tempMain-273.15)
+
+    useEffect(historicUnitConverter, [unitType, previousData]);
 
     return (
         <div className="cards">

@@ -72,8 +72,7 @@ const CurrentWeather = (props) => {
                 msToMPH={msToMPH}
                 metersToFeet={metersToFeet}
                 unitType={unitType}
-                setPreviousData={setPreviousData}
-                weather = {weather}/>}
+                setPreviousData={setPreviousData}/>}
         </div>
     )
 }

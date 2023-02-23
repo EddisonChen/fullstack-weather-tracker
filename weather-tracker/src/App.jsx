@@ -2,6 +2,7 @@ import './App.scss';
 import {useState, useEffect} from "react";
 import SearchWeather from './containers/SearchWeather/SearchWeather';
 import ShowWeather from './containers/ShowWeather/ShowWeather';
+import AddWeather from './components/AddWeather/AddWeather';
 import api_key from './config';
 
 function App() {
@@ -22,6 +23,26 @@ function App() {
 
   useEffect(getWeather, [cityId]);
 
+  const windDirectionConverter = (windDegree) => { // converts degrees to directions to post into local DB and to display on screen
+    if (windDegree > 337.5 || windDegree < 22.5) {
+      return "North";
+    } else if (windDegree > 22.5 && windDegree < 67.5) {
+        return "Northeast";
+    } else if (windDegree > 67.5 && windDegree < 112.5) {
+        return "East";
+    } else if (windDegree > 112.5 && windDegree < 157.5) {
+        return "Southeast";
+    } else if (windDegree > 157.5 && windDegree < 202.5) {
+      return "South";
+    } else if (windDegree > 202.5 && windDegree < 247.5) {
+        return "Southwest";
+    } else if (windDegree > 247.5 && windDegree < 292.5) {
+        return "West";
+    } else if (windDegree > 292.5 && windDegree < 337.5) {
+        return "Northwest";
+    } 
+};
+
   return (
     <main>
       <h1 className="title">WEATHERPRO</h1>
@@ -32,10 +53,13 @@ function App() {
             getWeather={getWeather} 
             weather={weather}/>
         </div>
+        {weather && <AddWeather
+          weather = {weather}
+          windDirectionConverter = {windDirectionConverter}/>}
         <div className="weather_cards">
           {weather && <ShowWeather 
             weather={weather}
-            />}
+            windDirectionConverter = {windDirectionConverter}/>}
         </div>
       </div>
     </main>
