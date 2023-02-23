@@ -48,12 +48,10 @@ const HistoricWeather = (props) => {
         }
     };
 
-    console.log(previousData.tempMain-273.15)
-
     useEffect(historicUnitConverter, [unitType, previousData]);
 
     return (
-        <div className="cards">
+        <section className="cards">
             <h2>Previous result from {previousData.createdAt.slice(0, 10)}</h2>
             <h2>{previousData.nameCity}, {previousData.nameCountry}</h2>
             <h3>{previousData.weatherMain}, {previousData.weatherDescription}</h3>
@@ -61,7 +59,7 @@ const HistoricWeather = (props) => {
             <p>Humidity: {previousData.humidity}%</p>
             <p>Visibility: {previousWeatherDataObject.visibility}</p>
             <p>Wind Direction: {previousWeatherDataObject.windDirection} | Wind Speed: {previousWeatherDataObject.windSpeed}</p>
-        </div>
+        </section>
     )
 }
 

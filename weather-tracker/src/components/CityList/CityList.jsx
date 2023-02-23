@@ -19,9 +19,9 @@ const CityList = (props) => {
     });
 
     return (
-        <div>
+        <ul>
             {mappedFilteredCities}
-        </div>
+        </ul>
     )
 }
 

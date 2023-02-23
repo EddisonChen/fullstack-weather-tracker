@@ -1,5 +1,3 @@
-import "./SingleCity.scss";
-
 const SingleCity = (props) => {
 
     const {name, state, country, id, setCityId, getWeather, setCityName} = props;
@@ -11,9 +9,9 @@ const SingleCity = (props) => {
     };
 
     return (
-        <div onClick={handleCityCardClick}>
+        <li onClick={handleCityCardClick}>
             <p className="cities">{name}, {state}, {country}</p>
-        </div>
+        </li>
     )
 }
 

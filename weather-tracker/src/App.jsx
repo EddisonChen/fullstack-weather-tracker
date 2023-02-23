@@ -10,7 +10,7 @@ function App() {
   const [cityId, setCityId] = useState("");
   const [weather, setWeather] = useState();
 
-  const getWeather = () => { // placed here so that cityId can be passed down into SearchWeather, and weather can be passed down into ShowWeather
+  const getWeather = () => {
     if (cityId !== "") {
         fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${api_key}`)
       .then((response) => {
@@ -23,7 +23,7 @@ function App() {
 
   useEffect(getWeather, [cityId]);
 
-  const windDirectionConverter = (windDegree) => { // converts degrees to directions to post into local DB and to display on screen
+  const windDirectionConverter = (windDegree) => {
     if (windDegree > 337.5 || windDegree < 22.5) {
       return "North";
     } else if (windDegree > 22.5 && windDegree < 67.5) {
@@ -44,25 +44,25 @@ function App() {
 };
 
   return (
-    <main>
+    <body>
       <h1 className="title">WEATHERPRO</h1>
-      <div className="body">
-        <div className="search">
+      <main className="body">
+        <section className="search">
           <SearchWeather 
             setCityId={setCityId} 
             getWeather={getWeather} 
             weather={weather}/>
-        </div>
+        </section>
         {weather && <AddWeather
           weather = {weather}
           windDirectionConverter = {windDirectionConverter}/>}
-        <div className="weather_cards">
+        <section className="weather_cards">
           {weather && <ShowWeather 
             weather={weather}
             windDirectionConverter = {windDirectionConverter}/>}
-        </div>
-      </div>
-    </main>
+        </section>
+      </main>
+    </body>
     
   );
 }

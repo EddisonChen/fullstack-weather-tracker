@@ -1,5 +1,4 @@
 import {useEffect} from 'react';
-import UnitToggle from '../UnitToggle/UnitToggle';
 import HistoricWeather from '../HistoricWeather/HistoricWeather'
 
 const CurrentWeather = (props) => {
@@ -52,19 +51,15 @@ const CurrentWeather = (props) => {
     useEffect(unitConverter, [unitType, weather]);
 
     return (
-        <div className="toggle_card">
-            <div className="toggle">
-                <UnitToggle 
-                    setUnitType={setUnitType} unitType={unitType}/>
-            </div>
-            <div className="cards">
+        <div>
+            <section className="cards">
                 <h2>{weather.name}, {weather.sys.country}</h2>
                 <h3>{weather.weather[0].main}, {weather.weather[0].description}</h3>
                 <p>{weatherObject.tempMain}, feels like {weatherObject.tempFeelsLike} | Range: {weatherObject.tempHigh} - {weatherObject.tempLow}</p>
                 <p>Humidity: {weather.main.humidity}%</p>
                 <p>Visibility: {weatherObject.visibility}</p>
                 <p>Wind: Direction: {weatherObject.windDirection} | Wind Speed: {weatherObject.windSpeed}</p>
-            </div>
+            </section>
             {previousData && <HistoricWeather
                 previousData={previousData}
                 kelvinToCelsius={kelvinToCelsius}
