@@ -1,6 +1,6 @@
 import "./ShowWeather.scss";
 import { useState, useEffect} from "react";
-import WeatherDisplayFunctions from "../../components/WeatherDisplayFunctions/WeatherDisplayFunctions"
+import CurrentWeather from "../../components/CurrentWeather/CurrentWeather"
 
 const ShowWeather = (props) => {
 
@@ -9,7 +9,7 @@ const ShowWeather = (props) => {
     const [unitType, setUnitType] = useState(false);
     const [previousData, setPreviousData] = useState();
 
-    const windDirectionConverter = (windDegree) => { // converts degrees to directions
+    const windDirectionConverter = (windDegree) => { // converts degrees to directions to post into local DB and to display on screen
         if (windDegree > 337.5 || windDegree < 22.5) {
           return "North";
         } else if (windDegree > 22.5 && windDegree < 67.5) {
@@ -39,7 +39,7 @@ const ShowWeather = (props) => {
         windDirection: windDirectionConverter(weather.wind.deg)
     });
     
-    const getPreviousResults = () => { // fetches historic weather data from API and local database
+    const getPreviousResults = () => { // only fetches weather from local DB once weather has a value
         fetch(`http://192.168.56.1:3020/weather/${weather.id}`)
         .then((response) => {
             return response.json();
@@ -52,7 +52,7 @@ const ShowWeather = (props) => {
     
     useEffect(getPreviousResults, [weather.id]);
 
-    const addNewWeather = () => { // adds new searched weather into local DB
+    const addNewWeather = () => { // only posts weather into local DB once weather has a value
         fetch("http://192.168.56.1:3020/weather/newweather",{
             method: "POST",
             headers: {
@@ -87,7 +87,7 @@ const ShowWeather = (props) => {
 
         return (
             <div className="both_cards">
-                <WeatherDisplayFunctions
+                <CurrentWeather
                     weather = {weather}
                     unitType = {unitType}
                     setUnitType = {setUnitType}

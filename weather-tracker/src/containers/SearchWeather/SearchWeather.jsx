@@ -1,7 +1,7 @@
 import "./SearchWeather.scss";
 import {useState} from "react";
 import cityIdDatas from "../../cityIdData/city.list.json";
-import CityCard from "../../components/CityCard/CityCard";
+import CityList from "../../components/CityList/CityList";
 
 const SearchWeather = (props) => {
 
@@ -31,7 +31,7 @@ const SearchWeather = (props) => {
                     className="search_box">
                 </input>
             </div>
-            <CityCard 
+            <CityList 
                 filteredCities={filteredCities}
                 setCityId={setCityId}
                 getWeather={getWeather} 

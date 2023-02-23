@@ -7,7 +7,7 @@ export const getCityWeather = (req, res) => {
     }) .catch((err) => {
         console.log(err)
     })
-}
+};
 
 export const addCityWeather = (req, res) => {
     CityWeather.create({
@@ -29,7 +29,7 @@ export const addCityWeather = (req, res) => {
     }) .catch((err => {
         console.log(err)
     }))
-}
+};
 
 export const getCityWeatherById = (req, res) => {
     const cityId = parseInt(req.params.cityId);
@@ -44,4 +44,4 @@ export const getCityWeatherById = (req, res) => {
     }) .catch(err => {
         console.log(err)
     })
-}
+};

@@ -9,7 +9,7 @@ function App() {
   const [cityId, setCityId] = useState("");
   const [weather, setWeather] = useState();
 
-  const getWeather = () => { // fetch request to get weather data from 3rd party API
+  const getWeather = () => { // placed here so that cityId can be passed down into SearchWeather, and weather can be passed down into ShowWeather
     if (cityId !== "") {
         fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${api_key}`)
       .then((response) => {
@@ -20,7 +20,7 @@ function App() {
     };
   };
 
-  useEffect(getWeather, [cityId]); // runs getWeather when cityID is updated
+  useEffect(getWeather, [cityId]);
 
   return (
     <main>

@@ -1,11 +1,10 @@
-import "./CityCard.scss";
 import SingleCity from "../SingleCity/SingleCity.jsx";
 
-const CityCard = (props) => {
+const CityList = (props) => {
 
     const {filteredCities, setCityId, getWeather, setCityName} = props;
 
-    const mappedFilteredCities = filteredCities.map((filteredCity) => { //maps out the cities that pass the filter
+    const mappedFilteredCities = filteredCities.map((filteredCity) => {
         return (
             <SingleCity 
                 name={filteredCity.name.slice(0, 30)}
@@ -26,4 +25,4 @@ const CityCard = (props) => {
     )
 }
 
-export default CityCard;
+export default CityList;

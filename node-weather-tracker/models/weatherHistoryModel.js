@@ -1,7 +1,7 @@
 import {Sequelize} from "sequelize";
 import {sequelize} from "../db/index.js";
 
-export const CityWeather = sequelize.define("cityWeathers", {
+export const CityWeather = sequelize.define("cityWeathers", { // defines attributes (name of table, columns, data types) about the model, which represents a table in the DB
     cityId: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -51,4 +51,4 @@ export const CityWeather = sequelize.define("cityWeathers", {
     windGustSpeed: {
         type: Sequelize.FLOAT
     }
-})
+});

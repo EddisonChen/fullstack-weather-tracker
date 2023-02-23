@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import UnitToggle from '../UnitToggle/UnitToggle';
 import HistoricWeather from '../HistoricWeather/HistoricWeather'
 
-const WeatherDisplayFunctions = (props) => {
+const CurrentWeather = (props) => {
 
     const {weather, 
         unitType, 
@@ -25,7 +25,7 @@ const WeatherDisplayFunctions = (props) => {
         return (speed * 2.237).toFixed() + " MPH"
     };
 
-    const unitConverter = () => {
+    const unitConverter = () => { // simpler to convert from kelvin/metric to imperial/metric
         if (unitType === true) { // imperial
             setWeatherObject({
                 ...weatherObject,
@@ -78,4 +78,4 @@ const WeatherDisplayFunctions = (props) => {
     )
 }
 
-export default WeatherDisplayFunctions;
+export default CurrentWeather;

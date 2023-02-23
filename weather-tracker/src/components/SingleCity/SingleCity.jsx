@@ -4,7 +4,7 @@ const SingleCity = (props) => {
 
     const {name, state, country, id, setCityId, getWeather, setCityName} = props;
 
-    const handleCityCardClick = () => { //runs getWeather, clears cityName, and sets cityId upon clicking a city
+    const handleCityCardClick = () => {
         getWeather();
         setCityName("");
         setCityId(id);
