@@ -9,7 +9,7 @@ const app = express(); // node.js framwork designed to build APIs
 app.use(bodyParser.json()); // used to process data sent in HTTP request body
 
 const corsOpts = { // specifies methods, origin, allowedHeaders
-    origin: '*',
+    origin: 'http://localhost:3000',
     methods: [
       'GET',
       'POST',
@@ -19,7 +19,7 @@ const corsOpts = { // specifies methods, origin, allowedHeaders
     ],
   };
   
-app.use(cors(corsOpts)); // allows API to receive resources from a specific origin, in this case, any
+app.use(cors(corsOpts)); 
 
 app.use("/weather", router);
 
