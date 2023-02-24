@@ -25,7 +25,7 @@ app.use("/weather", router);
 
 const port = 3020;
 
-sequelize.sync() // syncs Sequelize model with DB
+sequelize.sync() // syncs Sequelize model (data structure) with DB
 .then((result) => {
     console.log(result)
 }) .catch((err) => {

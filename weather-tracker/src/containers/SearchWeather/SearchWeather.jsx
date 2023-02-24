@@ -1,12 +1,27 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import cityIdDatas from "../../cityIdData/city.list.json";
 import CityList from "../../components/CityList/CityList";
+import api_key from '../../config';
 
 const SearchWeather = (props) => {
 
-    const {setCityId, getWeather, weather} = props;
+    const {weather, setWeather} = props;
 
     const [cityName, setCityName] = useState("");
+    const [cityId, setCityId] = useState("");
+
+    const getWeather = () => {
+        if (cityId !== "") {
+            fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${api_key}`)
+        .then((response) => {
+            return response.json();
+        }) .then((weatherData) => {
+            setWeather(weatherData);
+        });
+        };
+    };
+
+    useEffect(getWeather, [cityId]);
 
     const handleSearchInput = (event) => { // sets cityName to typed user input
         const cleanInput = event.target.value.toLowerCase();

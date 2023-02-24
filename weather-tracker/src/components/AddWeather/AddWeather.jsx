@@ -12,9 +12,9 @@ const AddWeather = (props) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(jsonData)
-        }) .then((res) => {
+        }).then((res) => {
             console.log(res)
-        }) .catch((err) => {
+        }).catch((err) => {
                 console.log(err)
         })
     };

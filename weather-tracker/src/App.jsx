@@ -1,27 +1,12 @@
 import './App.scss';
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import SearchWeather from './containers/SearchWeather/SearchWeather';
 import ShowWeather from './containers/ShowWeather/ShowWeather';
 import AddWeather from './components/AddWeather/AddWeather';
-import api_key from './config';
 
 function App() {
 
-  const [cityId, setCityId] = useState("");
   const [weather, setWeather] = useState();
-
-  const getWeather = () => {
-    if (cityId !== "") {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${api_key}`)
-      .then((response) => {
-        return response.json();
-      }) .then((weatherData) => {
-        setWeather(weatherData);
-      });
-    };
-  };
-
-  useEffect(getWeather, [cityId]);
 
   const windDirectionConverter = (windDegree) => {
     if (windDegree > 337.5 || windDegree < 22.5) {
@@ -44,14 +29,13 @@ function App() {
   };
 
   return (
-    <body>
+    <div>
       <h1 className="title">WEATHERPRO</h1>
       <main className="body">
         <section className="search">
           <SearchWeather 
-            setCityId={setCityId} 
-            getWeather={getWeather} 
-            weather={weather}/>
+            weather={weather}
+            setWeather = {setWeather}/>
         </section>
         {weather && <AddWeather
           weather = {weather}
@@ -62,7 +46,7 @@ function App() {
             windDirectionConverter = {windDirectionConverter}/>}
         </section>
       </main>
-    </body>
+    </div>
     
   );
 }

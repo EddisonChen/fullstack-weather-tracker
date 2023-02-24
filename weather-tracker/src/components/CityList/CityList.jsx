@@ -10,6 +10,7 @@ const CityList = (props) => {
                 name={filteredCity.name.slice(0, 30)}
                 state={filteredCity.state}
                 country={filteredCity.country}
+                key={filteredCity.id}
                 id={filteredCity.id}
                 setCityId={setCityId}
                 getWeather={getWeather}
